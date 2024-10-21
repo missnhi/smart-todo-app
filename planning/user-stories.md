@@ -1,4 +1,4 @@
-# User Stories
+## User Stories
 _As a [user] I want to do [x] so that [y]_
 
 ### Nhi
@@ -16,5 +16,25 @@ _As a [user] I want to do [x] so that [y]_
   * As a user, I want to be able to come back to my tasks, so that I don’t have to keep the website open
   * As a user, I want to be able to create sub-tasks, so that I know what steps I have to take to achieve my goal
   * As a user, I want to receive reminders about my tasks, so that I don’t forget to do them
+  * As a user, I want to be able to repeat common tasks without recreating them, so that I can save time
 
   ## Features
+  Based on these user stories, we can narrow features down to the following:
+
+  ### ToDo Task Features
+  * Create Task
+  * Create sub-tasks (breakdowns)
+  * Tag task
+  * Add due date
+  * Set reminders
+  * Search tasks
+  * Filter By tag
+  * Save common tags
+
+  
+  ### User Features
+  * Create Account
+  * Login/Logout
+  * Set account theme
+  * Edit profile
+
