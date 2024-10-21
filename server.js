@@ -3,8 +3,10 @@ require('dotenv').config();
 
 // Web server config
 const sassMiddleware = require('./lib/sass-middleware');
+const {sessionMiddleware} = require('./middleware/cookie-middleware');
 const express = require('express');
 const morgan = require('morgan');
+const { getUserById } = require('./routes/_helpers.js');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -25,12 +27,14 @@ app.use(
   })
 );
 app.use(express.static('public'));
+app.use(sessionMiddleware);
+
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
-const usersRoutes = require('./routes/users');
+const usersRoutes = require('./routes/users.js');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -44,8 +48,13 @@ app.use('/users', usersRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get('/', (req, res) => {
-  res.render('index');
+app.get('/', async(req, res) => {
+  console.log("Route '/' hit");
+  const user = await getUserById(req);
+  console.log("in server.js, user =",user);
+
+  const templateVars = {user};
+  res.render('index', templateVars);
 });
 
 app.listen(PORT, () => {

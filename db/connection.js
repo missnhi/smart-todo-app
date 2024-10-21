@@ -11,6 +11,12 @@ const dbParams = {
 
 const db = new Pool(dbParams);
 
-db.connect();
+db.connect()
+  .then(() => {
+    console.log('Connected to the database:', dbParams.database);
+  })
+  .catch(err => {
+    console.error('Error connecting to the database:', err);
+  });
 
 module.exports = db;
