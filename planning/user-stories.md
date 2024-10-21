@@ -23,13 +23,15 @@ _As a [user] I want to do [x] so that [y]_
 
   ### ToDo Task Features
   * Create Task
-  * Create sub-tasks (breakdowns)
+    * Searching APIs
   * Tag task
+    * To watch, to read
   * Add due date
   * Set reminders
   * Search tasks
-  * Filter By tag
+    * Filter By tag
   * Save common tags
+  * View more data about a task
 
   
   ### User Features
@@ -39,10 +41,55 @@ _As a [user] I want to do [x] so that [y]_
   * Edit profile
 
 ## Timeline
-4 days to go!
-EOD October 21 - 25%
-EOD October 22 - 50%
-EOD October 23 - 75%
-EOD October 24 - 100%
+### 4 days to go!<br>
+EOD Mon, October 21 - 25%<br>
+Features to complete:
+  * Hi-Fi Prototype - DONE
+  * Template HTML
+    * Home page - Bronwen
+    * Login - Nhi
+    * Search Tasks - Bronwen
+    * Create Tasks - Nhi
+  * Set up routes - Nhi
+  * Searching APIs Function - Nhi
+  * Database Architecture & Setup - Bronwen
+
+  * OPTIONAL: 
+    * Start implementing RESTful routes with DB
+
+EOD Tues, October 22 - 50%<br>
+MVP should be done
+  * Create Account
+  * Login/Logout
+  * Create Task Action
+  * Automatically assign tasks to a list (implementing the API calls)
+
+EOD Wed, October 23 - 75%<br>
+  * Add due date
+  * Set reminders
+  * View more data about a task
+
+EOD Thurs, October 24 - 100%
+* Edit profile
+* Set account theme
 
 ## MVP
+Users **HAVE** to be able to...
+* Create Account
+* Login/Logout
+* Create Task
+  * Searching APIs
+* Search tasks
+  * Filter By tag
+* Manually assign task to a list (To watch, to read)
+
+## Tech stack
+* ES6 for server-side (NodeJS) code
+* NodeJS
+* Express
+  * RESTful routes
+* One or more CSS or UI "framework"s:
+  * jQuery
+  * Custom CSS
+* PostgreSQL and pg (with promises) for DBMS
+* git for version control
