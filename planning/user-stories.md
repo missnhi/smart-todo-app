@@ -45,6 +45,7 @@ _As a [user] I want to do [x] so that [y]_
 EOD Mon, October 21 - 25%<br>
 Features to complete:
   * Hi-Fi Prototype - DONE
+  * Moodboard - Bronwen IP
   * Template HTML
     * Home page - Bronwen
     * Login - Nhi
