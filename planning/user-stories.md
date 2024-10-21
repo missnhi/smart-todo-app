@@ -38,3 +38,11 @@ _As a [user] I want to do [x] so that [y]_
   * Set account theme
   * Edit profile
 
+## Timeline
+4 days to go!
+EOD October 21 - 25%
+EOD October 22 - 50%
+EOD October 23 - 75%
+EOD October 24 - 100%
+
+## MVP
