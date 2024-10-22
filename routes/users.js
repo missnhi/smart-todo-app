@@ -7,9 +7,21 @@
 
 const express = require('express');
 const router  = express.Router();
-
+const { getUsers} = require ('../db/queries/users')
 router.get('/', (req, res) => {
-  res.render('users');
-}); 
+  console.log("in the router get/");
+
+  getUsers()
+    .then(users => {
+      console.log(users); // Log all users
+      const user = req.session.user_id ? users.find(u => u.id === req.session.user_id) : null;
+      const templateVars = {
+        user
+      };
+      res.render('index', templateVars);
+    })
+    .catch(err =>
+    res.status(500).send("Error retrieving user"));
+});
 
 module.exports = router;
