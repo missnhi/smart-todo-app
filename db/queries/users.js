@@ -1,10 +1,17 @@
 const db = require('../connection');
 
-const getUsers = () => {
-  return db.query('SELECT * FROM users;')
+const getUsers = async () => {
+  return db.query(`SELECT * FROM users;`)
     .then(data => {
       return data.rows;
     });
 };
 
-module.exports = { getUsers };
+const getUserByIdQuery = async (id) => {
+  return db.query('SELECT * FROM users where id = $1;', [id])
+    .then(data => {
+      return data.rows[0];
+    });
+};
+
+module.exports = { getUsers, getUserByIdQuery };
