@@ -19,7 +19,7 @@
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   min-height: 100vh;
   font-family: Nunito, sans-serif;
@@ -37,14 +37,14 @@ body {
   );
 }
 
-h1, h2, .header {
+h1, h2, .heading {
   font-family: Montserrat, sans-serif;
   font-weight: 600;
   font-size: 36px;
   margin: 1rem 0;
 }
 
-h3, h4, .sub-header {
+h3, h4, .sub-heading {
   font-family: Lora, serif;
   font-weight: 500;
   font-size: 30px;

@@ -1,33 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <title>Home Page - TODO</title>
+  <head>
+    <title>Home Page - TODO</title>
     <!-- Bootstrap CSS -->
     <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-            integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-            crossorigin="anonymous"
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
     />
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/layout.css" />
+    <link rel="stylesheet" href="/styles/cards.css" />
+    <link rel="stylesheet" href="/styles/todo-items.css" />
+    <link rel="stylesheet" href="/styles/footer.css" />
+    <link rel="stylesheet" href="/styles/navbar.css" />
 
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
-</head>
-<%- include('partials/_header') %>
-<body>
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script defer src="/scripts/app.js"></script>
+  </head>
+  <%- include('partials/_header') %>
+  <body>
+    <!-- 
   <h1>Heading - Montserrat Semi-Bold, 36px</h1>
   <h3>Sub-heading - Lora Medium, 30px</h3>
   <h5>Paragraph Section - Nunito Medium Italic, 20px</h5>
   <p>Paragraph - Nunito Regular, 16px</p>
-</body>
+  -->
+    <!-- TODO: Remove Cards and todo items to components -->
+    <main>
+      <section id="home-banner">
+        <div id="hero-text" class="heading">Some text here</div>
+      </section>
 
+      <section id="home-quick-todo">
+        <h1>Quick Add a ToDo</h1>
+        <form>
+          <input type="text" placeholder="What do you need to do?" />
+          <select name="lists">
+            <option value="" selected disabled hidden>Add to list</option>
+            <option value="create new list">+ Create a new list</option>
+          </select>
+          <button type="submit">+ Add ToDo</button>
+        </form>
+      </section>
+
+      <section id="home-lists">
+        <h1>What have you got to do?</h1>
+        <div class="flex-row-container">
+          <!-- This will loop over all the lists for a user and display them. For styling purposes, they're hard-coded at the moment -->
+          <div class="todo-list-card">
+            <div class="square-card">
+              <img
+                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+              />
+            </div>
+            <span class="paragraph">List Name →</span>
+          </div>
+
+          <div class="todo-list-card">
+            <div class="square-card">
+              <img
+                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+              />
+            </div>
+            <span class="paragraph">List Name →</span>
+          </div>
+
+          <div class="todo-list-card">
+            <div class="square-card">
+              <img
+                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+              />
+            </div>
+            <span class="paragraph">List Name →</span>
+          </div>
+
+          <div class="todo-list-card">
+            <div class="square-card">
+              <img
+                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+              />
+            </div>
+            <span class="paragraph">List Name →</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="home-todos-glance">
+        <h1>ToDos At-A-Glance</h1>
+        <div class="todo-item">
+          <div class="todo-item-card">
+            <div class="todo-item-info">
+              <button
+                type="button"
+                class="complete-task-btn"
+                name="complete-task"
+                value="complete"
+              ></button>
+              <div class="todo-item-text">
+                <span class="todo-item-title">Do a really important thing</span>
+                <span class="todo-item-deadline">Due in 23 days</span>
+              </div>
+            </div>
+            <span class="continue-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="todo-item">
+          <div class="todo-item-card">
+            <div class="todo-item-info">
+              <button
+                type="button"
+                class="complete-task-btn"
+                name="complete-task"
+                value="complete"
+              ></button>
+              <div class="todo-item-text">
+                <span class="todo-item-title">Do a really important thing</span>
+                <span class="todo-item-deadline">Due in 23 days</span>
+              </div>
+            </div>
+            <span class="continue-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="todo-item">
+          <div class="todo-item-card">
+            <div class="todo-item-info">
+              <button
+                type="button"
+                class="complete-task-btn"
+                name="complete-task"
+                value="complete"
+              ></button>
+              <div class="todo-item-text">
+                <span class="todo-item-title">Do a really important thing</span>
+                <span class="todo-item-deadline">Due in 23 days</span>
+              </div>
+            </div>
+            <span class="continue-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="todo-item">
+          <div class="todo-item-card">
+            <div class="todo-item-info">
+              <button
+                type="button"
+                class="complete-task-btn"
+                name="complete-task"
+                value="complete"
+              ></button>
+              <div class="todo-item-text">
+                <span class="todo-item-title">Do a really important thing</span>
+                <span class="todo-item-deadline">Due in 23 days</span>
+              </div>
+            </div>
+            <span class="continue-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="todo-item">
+          <div class="todo-item-card">
+            <div class="todo-item-info">
+              <button
+                type="button"
+                class="complete-task-btn"
+                name="complete-task"
+                value="complete"
+              ></button>
+              <div class="todo-item-text">
+                <span class="todo-item-title">Do a really important thing</span>
+                <span class="todo-item-deadline">Due in 23 days</span>
+              </div>
+            </div>
+            <span class="continue-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="todo-item">
+          <div class="todo-item-card">
+            <div class="todo-item-info">
+              <button
+                type="button"
+                class="complete-task-btn"
+                name="complete-task"
+                value="complete"
+              ></button>
+              <div class="todo-item-text">
+                <span class="todo-item-title">Do a really important thing</span>
+                <span class="todo-item-deadline">Due in 23 days</span>
+              </div>
+            </div>
+            <span class="continue-arrow">→</span>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <h6>Smart ToDo App</h6>
+      <p>Some Link</p>
+      <p>Some Link</p>
+      <p>Some Link</p>
+      <p>Some Link</p>
+    </footer>
+  </body>
 </html>
