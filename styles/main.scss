@@ -1,9 +1,29 @@
+@font-face {
+  font-family: Montserrat;
+  font-optical-sizing: auto;
+  src: url('../fonts/Montserrat/Montserrat-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: Lora;
+  font-optical-sizing: auto;
+  src: url('../fonts/Lora/Lora-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url('../fonts/Nunito/Nunito-VariableFont_wght.ttf');
+}
+
+
 body {
   display: flex;
   flex-direction: column;
   //justify-content: center;
   //align-items: center;
   min-height: 100vh;
+  font-family: Nunito, sans-serif;
+  font-weight: normal;
 
   background: rgb(163, 208, 219);
   background: linear-gradient(
@@ -15,4 +35,33 @@ body {
     rgba(163, 208, 219, 1) 74%,
     rgba(163, 208, 219, 1) 100%
   );
+}
+
+h1, h2, .header {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  margin: 1rem 0;
+}
+
+h3, h4, .sub-header {
+  font-family: Lora, serif;
+  font-weight: 500;
+  font-size: 30px;
+  margin: 1rem 0;
+}
+
+h5, h6, .paragraph-section {
+  font-family: Nunito, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  font-style: italic;
+  color: #565656;
+  margin: 1rem 0 0 0;
+}
+
+p, .paragraph {
+  font-family: Nunito, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
 }
