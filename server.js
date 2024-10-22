@@ -11,6 +11,13 @@ const { getUserById } = require('./routes/_helpers.js');
 const PORT = process.env.PORT || 8081;
 const app = express();
 
+// Separated Routes for each Resource
+// Note: Feel free to replace the example routes below with your own
+const userApiRoutes = require('./routes/users-api');
+const widgetApiRoutes = require('./routes/widgets-api');
+const usersRoutes = require('./routes/users.js');
+const authRoutes = require('./routes/authentication.js');
+
 app.set('view engine', 'ejs');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -30,18 +37,13 @@ app.use(express.static('public'));
 app.use(sessionMiddleware);
 
 
-// Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-const userApiRoutes = require('./routes/users-api');
-const widgetApiRoutes = require('./routes/widgets-api');
-const usersRoutes = require('./routes/users.js');
-
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
+app.use('/auth', authRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
