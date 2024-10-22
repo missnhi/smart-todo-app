@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
   getUsers()
     .then(users => {
-      console.log(users); // Log all users
+      console.log("in the router get all users", users); // Log all users
       const user = req.session.user_id ? users.find(u => u.id === req.session.user_id) : null;
       const templateVars = {
         user
