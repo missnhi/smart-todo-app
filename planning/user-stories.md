@@ -45,7 +45,7 @@ _As a [user] I want to do [x] so that [y]_
 EOD Mon, October 21 - 25%<br>
 Features to complete:
   * Hi-Fi Prototype - DONE
-  * Moodboard - Bronwen IP
+  * Moodboard - Bronwen DONE
   * Template HTML
     * Home page - Bronwen
     * Login - Nhi
@@ -53,7 +53,7 @@ Features to complete:
     * Create Tasks - Nhi
   * Set up routes - Nhi
   * Searching APIs Function - Nhi
-  * Database Architecture & Setup - Bronwen
+  * Database Architecture & Setup - Bronwen DONE
 
   * OPTIONAL: 
     * Start implementing RESTful routes with DB
