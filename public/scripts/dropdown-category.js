@@ -22,7 +22,7 @@ async function handleSubmit(event) {
     });
 
     const data = await response.json();
-    console.log("API response:", data); // Log the API response to verify category
+    console.log("API response structute:", data); // Log the API response to verify category
     // EX of data = { category : { category:"ToRead",  errors : [] } }
 
     if (response.ok) {
@@ -41,10 +41,10 @@ async function handleSubmit(event) {
       }
 
       // Display additional information on the screen
-      console.log("*********************************API response display information:", data.displayInformation);
+      console.log("*********************************API response display information:", data.category.displayInformation);
 
-      if (data.displayInformation) {
-        displayInformationOnScreen(data.displayInformation);
+      if (data.category.displayInformation) {
+        displayInformationOnScreen(data.category.displayInformation);
       }
 
     } else {
