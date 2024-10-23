@@ -1,33 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Home Page - TODO</title>
+    
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('includes') %>
+    
+  </head>
+  <%- include('partials/_header') %>
+  <body>
+    <!-- TODO: Remove Cards and todo items to components -->
+    <%- include('partials/_hero-banner') %>
+    <a id="home-cta" href="#home-cta">
+      <p>Explore Your To-Dos Below</p>
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+    <main>
+      <section class="home-quick-todo">
+        <h1>Quick Add a ToDo</h1>
+        <form>
+          <input class="task-name" type="text" placeholder="What do you need to do?" />
+          <select class="select-list" name="lists">
+              <optgroup label="Add to list">
+                <option value="" selected disabled hidden>Add to list</option>
+                <option value="create new list">+ Create a new list</option>
+              </optgroup>
+          </select>
+          <button class="default-btn" type="submit">+ Add ToDo</button>
+        </form>
+      </section>
 
-<head>
-  <title>Home Page - TODO</title>
-    <!-- Bootstrap CSS -->
-    <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-            integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-            crossorigin="anonymous"
-    />
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
+      <section class="home-lists">
+        <h1>What have you got to do?</h1>
+        <div class="flex-row-container">
+          <!-- This will loop over all the lists for a user and display them. For styling purposes, they're hard-coded at the moment -->
+          <div class="todo-list-card">
+            <div class="square-card">
+              <img
+                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+              />
+            </div>
+            <span class="paragraph">List Name →</span>
+          </div>
 
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
-</head>
-<%- include('partials/_header') %>
-<body>
-  <h1>Heading - Montserrat Semi-Bold, 36px</h1>
-  <h3>Sub-heading - Lora Medium, 30px</h3>
-  <h5>Paragraph Section - Nunito Medium Italic, 20px</h5>
-  <p>Paragraph - Nunito Regular, 16px</p>
-</body>
+          <div class="todo-list-card">
+            <div class="square-card">
+              <img
+                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+              />
+            </div>
+            <span class="paragraph">List Name →</span>
+          </div>
 
+          <div class="todo-list-card">
+            <div class="square-card">
+              <img
+                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+              />
+            </div>
+            <span class="paragraph">List Name →</span>
+          </div>
+
+          <div class="todo-list-card">
+            <div class="square-card">
+              <img
+                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+              />
+            </div>
+            <span class="paragraph">List Name →</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-todos-glance">
+        <h1>ToDos At-A-Glance</h1>
+        <%- include('partials/_task-item', {completed: true}) %>
+        <%- include('partials/_task-item', {completed: false}) %>
+        <%- include('partials/_task-item', {completed: false}) %>
+        <%- include('partials/_task-item', {completed: false}) %>
+      </section>
+    </main>
+    <footer>
+      <h6>Smart ToDo App</h6>
+      <p>Some Link</p>
+      <p>Some Link</p>
+      <p>Some Link</p>
+      <p>Some Link</p>
+    </footer>
+  </body>
 </html>

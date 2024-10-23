@@ -1,0 +1,29 @@
+.hero-header {
+  width: 100%;
+  height: 50vh;
+  background-color: #f9f9f9;
+  position: relative;
+  padding: 0 10%;
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .hero-content {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+  img {
+    max-width: 50%;
+    max-height: 100%;
+    height: auto;
+    object-fit: contain;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+}
