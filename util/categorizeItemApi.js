@@ -130,15 +130,17 @@ const categorizeItem = async (itemName, userLocation = '53.5461,-113.4938') => {
 
   try {
     // const [ ebayResponse] = await Promise.all([
-    const [movieResponse, bookResponse, placeResponse, ebayResponse] = await Promise.all([
-      //TMBD API for movies
-      axios.get('https://api.themoviedb.org/3/search/movie', {
-        params: { api_key: process.env.TMDB_API_KEY, query: itemName }
-      }),
+    const [bookResponse, movieResponse, placeResponse, ebayResponse] = await Promise.all([
       //Google Books API
       axios.get('https://www.googleapis.com/books/v1/volumes', {
         params: { q: itemName, key: process.env.GOOGLE_BOOKS_API_KEY }
       }),
+
+      //TMBD API for movies
+      axios.get('https://api.themoviedb.org/3/search/movie', {
+        params: { api_key: process.env.TMDB_API_KEY, query: itemName }
+      }),
+
       //Google Places API
       axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json', {
         params: {
