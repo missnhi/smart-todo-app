@@ -5,11 +5,17 @@ Each API call is wrapped in a try/catch block to handle any errors that might oc
 during the requests (failed API call, invalid API key).
 If any API fails or returns no results, the next category attempt is made.
 
-DOCS: https://developer.themoviedb.org/docs/search-and-query-for-details
-
+DOCS:
+for movies: TMDB API
+    https://developer.themoviedb.org/docs/search-and-query-for-details
+for restaurants: Google Places API
+    https://developers.google.com/maps/documentation/places/web-service/search-find-place
+for books: Google Books API
+    https://developers.google.com/books/docs/v1/using#auth
  */
 const categorizeItem = async (itemName) => {
-  // Attempt to categorize as a movie/series
+
+  // 1. Categorize as a movie/series
   try {
     const movieResponse = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
       params: {
@@ -19,16 +25,86 @@ const categorizeItem = async (itemName) => {
     });
     //look in the resutl field, length is how many movies match the query
     if (movieResponse.data.results.length > 0) {
+      console.log(`Number of result: ${movieResponse.data.results.length}`);
       console.log(`Categorized as movie: ${itemName}`);
       console.log(movieResponse.data.results[0].overview);
 
-      return 'Film/Series';
+      return 'ToWatch';
     }
   } catch (error) {
     console.error('Error fetching movie data:', error);
   }
 
-  // Fallback if no category is detected
+  // 2. Check if it's a book (Google Books API)
+  try {
+    const bookResponse = await axios.get('https://www.googleapis.com/books/v1/volumes', {
+      params: {
+        q: itemName,
+        key: process.env.GOOGLE_BOOKS_API_KEY // Use your Google Books API key
+      }
+    });
+
+    // Filter the results to check for an exact match (case-insensitive)
+    const exactMatchResults = bookResponse.data.items.filter(item => {
+      // Google Books API returns the book title in item.volumeInfo.title
+      return item.volumeInfo.title.toLowerCase() === itemName.toLowerCase();
+    });
+
+    if (exactMatchResults.length > 0) {
+      console.log(`Number of result: ${bookResponse.data.items.length}`);
+      console.log(bookResponse.data.items[0].volumeInfo.title);
+
+      console.log(bookResponse.data.items[0].volumeInfo.imageLinks.thumbnail);
+      console.log(bookResponse.data.items[0].volumeInfo.previewLink);
+
+      return 'ToRead';
+    }
+  } catch (error) {
+    console.error('Error fetching book data:', error);
+  }
+
+  // 3. Check if it's a restaurant/cafe (Google Places API)
+  try {
+    const placeResponse = await axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json', {
+      params: {
+        input: itemName, // Name of the item (restaurant/cafe)
+        inputtype: 'textquery', // input type (e.g., text query)
+        locationbias: 'circle:2000@53.530110,-113.495629', // 2km radius around Edmonton's coordinates
+        fields: 'formatted_address,name,rating,opening_hours,geometry', // Specify what fields you want in the response
+        key: process.env.GOOGLE_PLACES_API_KEY
+      }
+    });
+
+    const exactMatchResults = placeResponse.data.candidates.filter(candidate => {
+      // Perform a case-insensitive exact match of the name
+      return candidate.name.toLowerCase() === itemName.toLowerCase();
+    });
+
+    if (exactMatchResults.length > 0) {
+      console.log("Google Place API: ", placeResponse.data.candidates);
+
+      return 'ToEat'; // Return the exact match(es)
+    }
+  } catch (error) {
+    console.error('Error fetching restaurant data:', error);
+  }
+
+  // // 4. Check if it's a product (Walmart API)
+  // try {
+  //   const productResponse = await axios.get('https://api.walmartlabs.com/v1/search', {
+  //     params: {
+  //       query: itemName,
+  //       apiKey: process.env.WALMART_API_KEY // Use your Walmart API key
+  //     }
+  //   });
+  //   if (productResponse.data.items && productResponse.data.items.length > 0) {
+  //     return 'ToBuy';
+  //   }
+  // } catch (error) {
+  //   console.error('Error fetching product data:', error);
+  // }
+
+  // 5. Uncategorized if no category is detected
   console.log(`Item could not be categorized: ${itemName}`);
   return 'Uncategorized';
 };

@@ -1,6 +1,5 @@
 // this will be mounted to /api route in server.js
 
-
 const express = require('express');
 const {categorizeItem} = require("../util/categorizeItemApi");
 const router = express.Router();
@@ -8,9 +7,12 @@ const router = express.Router();
 // Route for adding a new to-do item
 router.post('/todo/categorize', async(req, res) => {
   const itemName = req.body.itemName; //from todo_input_form.ejs
+  // console.log("Request body:", req.body);
+
   if (!itemName) {
     return res.status(400).json({error: 'Item name is required'});
   }
+
   try {
     console.log(itemName); //error checking
 
@@ -20,7 +22,7 @@ router.post('/todo/categorize', async(req, res) => {
 
     // will change with actual database logic)
     const newTodo = {id: Date.now(), name: itemName, category: category};
-    console.log(newTodo);
+    console.log("NewTodo:", newTodo);
 
     return res.status(200).json({ category });
   } catch (error) {
@@ -29,7 +31,7 @@ router.post('/todo/categorize', async(req, res) => {
   }
 });
 
-// Route for overriding the category of a to-do item
+// route for overriding the category of a to-do item
 router.put('/todo/:id/category', (req, res) => {
   const newCategory = req.body.newCategory;
   if (!newCategory) {
