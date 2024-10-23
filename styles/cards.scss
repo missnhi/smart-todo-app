@@ -4,8 +4,14 @@
   justify-content: start;
   gap: 0.5rem;
   margin: 0 16px;
-
+  
   cursor: pointer;
+
+  &:hover{
+    .square-card {
+      transform: scale(1.05);
+    }
+  }
 }
 
 .square-card {
@@ -13,6 +19,7 @@
   height: 10rem;
   padding: 1rem;
   border-radius: 16px;
+  transition: all ease-in-out 300ms;
   
   background-color: #f9f9f9;
   box-shadow: 4px 6px 8px 0 rgba(0, 0, 0, 0.25);

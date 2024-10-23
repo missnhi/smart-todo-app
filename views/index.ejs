@@ -11,29 +11,28 @@
   </head>
   <%- include('partials/_header') %>
   <body>
-    <!-- 
-  <h1>Heading - Montserrat Semi-Bold, 36px</h1>
-  <h3>Sub-heading - Lora Medium, 30px</h3>
-  <h5>Paragraph Section - Nunito Medium Italic, 20px</h5>
-  <p>Paragraph - Nunito Regular, 16px</p>
-  -->
     <!-- TODO: Remove Cards and todo items to components -->
+    <section id="home-banner">
+      <div id="hero-text" class="heading">Some text here</div>
+      <img src="../assets/header-bubbles.png"/>
+    </section>
+    <a id="home-cta" href="#home-cta">
+      <p>Explore Your To-Dos Below</p>
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
     <main>
-      <section id="home-banner">
-        <div id="hero-text" class="heading">Some text here</div>
-      </section>
-
       <section id="home-quick-todo">
         <h1>Quick Add a ToDo</h1>
         <form>
-          <input type="text" placeholder="What do you need to do?" />
-          <select name="lists">
+          <input class="task-name" type="text" placeholder="What do you need to do?" />
+          <select class="select-list" name="lists">
             <option value="" selected disabled hidden>Add to list</option>
             <option value="create new list">+ Create a new list</option>
           </select>
           <button class="default-btn" type="submit">+ Add ToDo</button>
         </form>
       </section>
+
 
       <section id="home-lists">
         <h1>What have you got to do?</h1>
@@ -79,10 +78,10 @@
 
       <section id="home-todos-glance">
         <h1>ToDos At-A-Glance</h1>
-        <%- include('partials/_task-item') %>
-        <%- include('partials/_task-item') %>
-        <%- include('partials/_task-item') %>
-        <%- include('partials/_task-item') %>
+        <%- include('partials/_task-item', {completed: true}) %>
+        <%- include('partials/_task-item', {completed: false}) %>
+        <%- include('partials/_task-item', {completed: false}) %>
+        <%- include('partials/_task-item', {completed: false}) %>
       </section>
     </main>
     <footer>

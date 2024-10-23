@@ -37,7 +37,7 @@ body {
   ); */
 
   background: rgb(250,214,190);
-  background: linear-gradient(0deg, rgba(255,226,199,1) 0%, rgba(249,249,249,1) 100%);
+  background: linear-gradient(0deg, rgba(255,226,199,1) 0%, rgba(249,249,249,1) 75%);
 }
 
 h1, h2, .heading {
@@ -81,5 +81,25 @@ p, .paragraph {
   &:hover {
     background-color: #d27731;
     color: #fff;
+  }
+}
+
+#home-cta {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #383932;
+
+  position: relative;
+  top: -50px;
+  p {
+    margin-bottom: 0;
+    
+  }
+
+  &:hover{
+    text-decoration: none;
   }
 }

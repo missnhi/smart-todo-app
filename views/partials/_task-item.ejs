@@ -1,12 +1,18 @@
 <div class="todo-item">
-  <div class="todo-item-card">
+  <div class="todo-item-card <%= completed ? 'completed-item' : '' %>">
     <div class="todo-item-info">
       <button
         type="button"
         class="complete-task-btn"
         name="complete-task"
         value="complete"
-      ></button>
+        onclick="(function() {
+          console.log('clicked todo item', 'isCompleted?', <%= completed %>);
+          //Do something
+        })()"
+      >
+      <img src="../assets/checkmark.png"/>
+      </button>
       <div class="todo-item-text">
         <span class="todo-item-title">Do a really important thing</span>
         <span class="todo-item-deadline">Due in 23 days</span>

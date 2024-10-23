@@ -3,14 +3,14 @@
 html,
 body {
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 main {
   width: 80%;
-  margin: 100px 0 auto;
+  margin: 0 auto;
 }
 
-#home-banner,
 #home-quick-todo,
 #home-lists,
 #home-todos-glance {
