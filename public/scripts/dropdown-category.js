@@ -57,6 +57,7 @@ async function handleSubmit(event) {
 
 // Function to display information on the screen
 function displayInformationOnScreen(info) {
+
   const displayDiv = document.getElementById("displayInformation");
 
   // Clear any previous data

@@ -11,7 +11,11 @@ How: add Javascript to make an API call
         <label for="itemName" class="form-label">Quick Add A ToDo</label>
         <div class="input-group">
             <input type="text" class="form-control rounded" id="itemName" name="itemName" placeholder="What are we doing?" required>
-            <button type="submit" class="btn btn-dark">+ Add ToDo</button>
+
+            <button type="submit" class="btn btn-dark" >
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search
+            </button>
         </div>
     </div>
 
@@ -27,6 +31,11 @@ How: add Javascript to make an API call
         </select>
     </div>
 </form>
+
+<button id= "confirm-choice-button" type="submit" class="btn btn-dark" >
+    <i class="fa-solid fa-magnifying-glass"></i>
+    Confirm
+</button>
 
 <!-- Add a section to display the information -->
 <div id="displayInformation">
