@@ -1,7 +1,5 @@
 // _helpers.js
-
-const bcrypt = require('bcryptjs');
-const { getUsers } = require('../db/queries/users.js');
+const { getUsers, getUserByIdQuery } = require('../db/queries/users.js');
 
 // Function to generate a random string
 const generateRandomString = () => {
@@ -13,10 +11,10 @@ const getUserById = async (req) => {
   const userId = req.session.user_id;
   console.log("Session user_id:", userId);
 
-  const users = await getUsers();
+  const user = await getUserByIdQuery(userId);
 
-  console.log("in _helpers.js, users = ",users);
-  return users.find(user => user.id === userId);
+  console.log("in _helpers.js, getUsersByIdQuery() = ",user);
+  return user;
 };
 
-module.exports = { generateRandomString, getUserById };
+module.exports = { generateRandomString, getUserById, getUsers };
