@@ -23,14 +23,22 @@ async function handleSubmit(event) {
 
     const data = await response.json();
     console.log("API response:", data); // Log the API response to verify category
+    // EX of data = { category : { category:"ToRead",  errors : [] } }
 
     if (response.ok) {
-      // Update the dropdown based on the categorized result
-      const categoryDropdown = document.getElementById("categoryDropdown");
-      console.log("Dropdown value before:", categoryDropdown.value);
-      console.log("API returned category:", data.category);
-      categoryDropdown.value = data.category;
-      console.log("Dropdown value after:", categoryDropdown.value);
+      // check if errors are present in the response
+      if (data.errors && data.errors.length > 0) {
+        // log the errors and display an alert to the user
+        console.error("Errors from API:", data.errors);
+        alert(`Error(s) occurred: ${data.errors.join(', ')}`);
+      } else {
+        // if no errors, update the dropdown based on the categorized result
+        const categoryDropdown = document.getElementById("categoryDropdown");
+        console.log("Dropdown value before:", categoryDropdown.value);
+        console.log("API returned category:", data.category.category);
+        categoryDropdown.value = data.category.category; // Update dropdown value
+        console.log("Dropdown value after:", categoryDropdown.value);
+      }
     } else {
       console.error(data.error);
       alert("Error categorizing item.");
