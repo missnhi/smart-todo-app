@@ -47,7 +47,7 @@ Features to complete:
   * Hi-Fi Prototype - DONE
   * Moodboard - Bronwen DONE
   * Template HTML
-    * Home page - Bronwen
+    * Home page - Bronwen DONE
     * Login - Nhi
     * Search Tasks - Bronwen
     * Create Tasks - Nhi
