@@ -1,9 +1,13 @@
 header {
-  background-color: #8cc1ce; /* #a3d0db */
+  background-color: #D6E1B6; /* #a3d0db */
   width: 85%;
   position: fixed;
   top: 16px;
   border-radius: 36px;
   box-shadow: 0 6px 8px 1px rgba(0, 0, 0, 0.25);
   z-index: 999;
+
+  nav a {
+    color: #484e35;
+  }
 }

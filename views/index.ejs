@@ -2,28 +2,12 @@
 <html lang="en">
   <head>
     <title>Home Page - TODO</title>
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-      crossorigin="anonymous"
-    />
+    
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" />
-    <link rel="stylesheet" href="/styles/main.css" />
-    <link rel="stylesheet" href="/styles/layout.css" />
-    <link rel="stylesheet" href="/styles/cards.css" />
-    <link rel="stylesheet" href="/styles/todo-items.css" />
-    <link rel="stylesheet" href="/styles/footer.css" />
-    <link rel="stylesheet" href="/styles/navbar.css" />
-
-    <script src="/vendor/jquery-3.0.0.js"></script>
-    <script defer src="/scripts/app.js"></script>
+    <%- include('includes') %>
+    
   </head>
   <%- include('partials/_header') %>
   <body>
@@ -47,7 +31,7 @@
             <option value="" selected disabled hidden>Add to list</option>
             <option value="create new list">+ Create a new list</option>
           </select>
-          <button type="submit">+ Add ToDo</button>
+          <button class="default-btn" type="submit">+ Add ToDo</button>
         </form>
       </section>
 
@@ -95,113 +79,10 @@
 
       <section id="home-todos-glance">
         <h1>ToDos At-A-Glance</h1>
-        <div class="todo-item">
-          <div class="todo-item-card">
-            <div class="todo-item-info">
-              <button
-                type="button"
-                class="complete-task-btn"
-                name="complete-task"
-                value="complete"
-              ></button>
-              <div class="todo-item-text">
-                <span class="todo-item-title">Do a really important thing</span>
-                <span class="todo-item-deadline">Due in 23 days</span>
-              </div>
-            </div>
-            <span class="continue-arrow">→</span>
-          </div>
-        </div>
-
-        <div class="todo-item">
-          <div class="todo-item-card">
-            <div class="todo-item-info">
-              <button
-                type="button"
-                class="complete-task-btn"
-                name="complete-task"
-                value="complete"
-              ></button>
-              <div class="todo-item-text">
-                <span class="todo-item-title">Do a really important thing</span>
-                <span class="todo-item-deadline">Due in 23 days</span>
-              </div>
-            </div>
-            <span class="continue-arrow">→</span>
-          </div>
-        </div>
-
-        <div class="todo-item">
-          <div class="todo-item-card">
-            <div class="todo-item-info">
-              <button
-                type="button"
-                class="complete-task-btn"
-                name="complete-task"
-                value="complete"
-              ></button>
-              <div class="todo-item-text">
-                <span class="todo-item-title">Do a really important thing</span>
-                <span class="todo-item-deadline">Due in 23 days</span>
-              </div>
-            </div>
-            <span class="continue-arrow">→</span>
-          </div>
-        </div>
-
-        <div class="todo-item">
-          <div class="todo-item-card">
-            <div class="todo-item-info">
-              <button
-                type="button"
-                class="complete-task-btn"
-                name="complete-task"
-                value="complete"
-              ></button>
-              <div class="todo-item-text">
-                <span class="todo-item-title">Do a really important thing</span>
-                <span class="todo-item-deadline">Due in 23 days</span>
-              </div>
-            </div>
-            <span class="continue-arrow">→</span>
-          </div>
-        </div>
-
-        <div class="todo-item">
-          <div class="todo-item-card">
-            <div class="todo-item-info">
-              <button
-                type="button"
-                class="complete-task-btn"
-                name="complete-task"
-                value="complete"
-              ></button>
-              <div class="todo-item-text">
-                <span class="todo-item-title">Do a really important thing</span>
-                <span class="todo-item-deadline">Due in 23 days</span>
-              </div>
-            </div>
-            <span class="continue-arrow">→</span>
-          </div>
-        </div>
-
-        <div class="todo-item">
-          <div class="todo-item-card">
-            <div class="todo-item-info">
-              <button
-                type="button"
-                class="complete-task-btn"
-                name="complete-task"
-                value="complete"
-              ></button>
-              <div class="todo-item-text">
-                <span class="todo-item-title">Do a really important thing</span>
-                <span class="todo-item-deadline">Due in 23 days</span>
-              </div>
-            </div>
-            <span class="continue-arrow">→</span>
-          </div>
-        </div>
+        <%- include('partials/_task-item') %>
+        <%- include('partials/_task-item') %>
+        <%- include('partials/_task-item') %>
+        <%- include('partials/_task-item') %>
       </section>
     </main>
     <footer>

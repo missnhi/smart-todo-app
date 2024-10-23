@@ -10,7 +10,10 @@ main {
   margin: 100px 0 auto;
 }
 
-section {
+#home-banner,
+#home-quick-todo,
+#home-lists,
+#home-todos-glance {
   width: 100%;
   margin-bottom: 2rem;
   display: flex;

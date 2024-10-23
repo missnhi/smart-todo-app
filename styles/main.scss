@@ -25,7 +25,7 @@ body {
   font-family: Nunito, sans-serif;
   font-weight: normal;
 
-  background: rgb(163, 208, 219);
+  /* background: rgb(163, 208, 219);
   background: linear-gradient(
     227deg,
     rgba(163, 208, 219, 1) 0%,
@@ -34,7 +34,10 @@ body {
     rgba(163, 219, 208, 1) 59%,
     rgba(163, 208, 219, 1) 74%,
     rgba(163, 208, 219, 1) 100%
-  );
+  ); */
+
+  background: rgb(250,214,190);
+  background: linear-gradient(0deg, rgba(255,226,199,1) 0%, rgba(249,249,249,1) 100%);
 }
 
 h1, h2, .heading {
@@ -64,4 +67,19 @@ p, .paragraph {
   font-family: Nunito, sans-serif;
   font-weight: 400;
   font-size: 16px;
+}
+
+.default-btn {
+  background-color: #FAA96C;
+  color: #383932;
+  border-radius: 32px;
+  padding: 0.25rem 1.25rem;
+  margin: 0.5rem;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d27731;
+    color: #fff;
+  }
 }
