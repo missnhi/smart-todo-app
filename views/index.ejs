@@ -12,29 +12,28 @@
   <%- include('partials/_header') %>
   <body>
     <!-- TODO: Remove Cards and todo items to components -->
-    <section id="home-banner">
-      <div id="hero-text" class="heading">Some text here</div>
-      <img src="../assets/header-bubbles.png"/>
-    </section>
+    <%- include('partials/_hero-banner') %>
     <a id="home-cta" href="#home-cta">
       <p>Explore Your To-Dos Below</p>
       <i class="fa-solid fa-chevron-down"></i>
     </a>
     <main>
-      <section id="home-quick-todo">
+      <section class="home-quick-todo">
         <h1>Quick Add a ToDo</h1>
         <form>
           <input class="task-name" type="text" placeholder="What do you need to do?" />
           <select class="select-list" name="lists">
-            <option value="" selected disabled hidden>Add to list</option>
-            <option value="create new list">+ Create a new list</option>
+              <optgroup label="Add to list">
+                <option value="" selected disabled hidden>Add to list</option>
+                <option value="create new list">+ Create a new list</option>
+              </optgroup>
           </select>
           <button class="default-btn" type="submit">+ Add ToDo</button>
         </form>
       </section>
 
 
-      <section id="home-lists">
+      <section class="home-lists">
         <h1>What have you got to do?</h1>
         <div class="flex-row-container">
           <!-- This will loop over all the lists for a user and display them. For styling purposes, they're hard-coded at the moment -->
@@ -76,7 +75,7 @@
         </div>
       </section>
 
-      <section id="home-todos-glance">
+      <section class="home-todos-glance">
         <h1>ToDos At-A-Glance</h1>
         <%- include('partials/_task-item', {completed: true}) %>
         <%- include('partials/_task-item', {completed: false}) %>
