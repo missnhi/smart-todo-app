@@ -39,6 +39,14 @@ async function handleSubmit(event) {
         categoryDropdown.value = data.category.category; // Update dropdown value
         console.log("Dropdown value after:", categoryDropdown.value);
       }
+
+      // Display additional information on the screen
+      console.log("*********************************API response display information:", data.displayInformation);
+
+      if (data.displayInformation) {
+        displayInformationOnScreen(data.displayInformation);
+      }
+
     } else {
       console.error(data.error);
       alert("Error categorizing item.");
@@ -46,5 +54,45 @@ async function handleSubmit(event) {
   } catch (error) {
     console.error('Error:', error);
     alert('An error occurred. Please try again.');
+  }
+}
+
+// Function to display information on the screen
+function displayInformationOnScreen(info) {
+  const displayDiv = document.getElementById("displayInformation");
+
+  // Clear any previous data
+  displayDiv.innerHTML = '';
+  console.log(info);
+  if (info.title) {
+    displayDiv.innerHTML += `<h3>Title: ${info.title}</h3>`;
+  }
+
+  if (info.overview) {
+    displayDiv.innerHTML += `<p><strong>Overview:</strong> ${info.overview}</p>`;
+  }
+
+  if (info.releaseDate) {
+    displayDiv.innerHTML += `<p><strong>Release Date:</strong> ${info.releaseDate}</p>`;
+  }
+
+  if (info.thumbnail) {
+    displayDiv.innerHTML += `<img src="${info.thumbnail}" alt="Book Thumbnail" />`;
+  }
+
+  if (info.previewLink) {
+    displayDiv.innerHTML += `<p><a href="${info.previewLink}" target="_blank">Preview this Book</a></p>`;
+  }
+
+  if (info.name) {
+    displayDiv.innerHTML += `<h3>Restaurant Name: ${info.name}</h3>`;
+  }
+
+  if (info.address) {
+    displayDiv.innerHTML += `<p><strong>Address:</strong> ${info.address}</p>`;
+  }
+
+  if (info.rating) {
+    displayDiv.innerHTML += `<p><strong>Rating:</strong> ${info.rating}</p>`;
   }
 }

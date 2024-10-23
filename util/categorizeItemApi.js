@@ -124,84 +124,72 @@ const exactMatch = (candidateName, itemName) => {
 const categorizeItem = async (itemName, userLocation = '53.5461,-113.4938') => {
   const results = {
     category: 'Uncategorized', // default category
-    errors: [] // to store any API errors
+    errors: [], // to store any API errors
+    displayInformation: null // To store the display information for the front-end
   };
 
-  let displayInformation;
-
-  // Parallel API requests using Promise.all
   try {
     const [movieResponse, bookResponse, placeResponse] = await Promise.all([
-      // TMDB API (Movie/Series Search)
       axios.get('https://api.themoviedb.org/3/search/movie', {
-        params: {
-          api_key: process.env.TMDB_API_KEY, // TMDB API Key from .env file
-          query: itemName
-        }
+        params: { api_key: process.env.TMDB_API_KEY, query: itemName }
       }),
-      // Google Books API (Book Search)
       axios.get('https://www.googleapis.com/books/v1/volumes', {
-        params: {
-          q: itemName,
-          key: process.env.GOOGLE_BOOKS_API_KEY // Google Books API Key
-        }
+        params: { q: itemName, key: process.env.GOOGLE_BOOKS_API_KEY }
       }),
-      // Google Places API (Restaurant/Cafe Search) with configurable location bias
       axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json', {
         params: {
-          input: itemName, // Name of the item (restaurant/cafe)
-          inputtype: 'textquery', // Specifies input type (text query)
-          locationbias: `circle:2000@${userLocation}`, // Configurable location bias, default to Edmonton
+          input: itemName,
+          inputtype: 'textquery',
+          locationbias: `circle:2000@${userLocation}`,
           fields: 'formatted_address,name,rating,opening_hours,geometry',
-          key: process.env.GOOGLE_PLACES_API_KEY // Google Places API Key
+          key: process.env.GOOGLE_PLACES_API_KEY
         }
       })
     ]);
 
-    // Check if it's a movie/series (TMDB API)
+    // Movie
     const movieResult = movieResponse.data.results;
     if (movieResult && movieResult.length > 0) {
-      console.log(`Number of movie results: ${movieResult.length}`);
-      console.log(`Categorized as movie: ${itemName}`);
-
-      displayInformation = [movieResult[0].original_title, movieResult[0].overview, movieResult[0].release_date];
-      console.log(displayInformation);
       results.category = 'ToWatch';
+      results.displayInformation = {
+        title: movieResult[0].original_title,
+        overview: movieResult[0].overview,
+        releaseDate: movieResult[0].release_date
+      };
       return results;
     }
 
-    // Check if it's a book (Google Books API) with exact match
+    // Book
     const exactBookMatchResults = bookResponse.data.items.filter(item =>
       exactMatch(item.volumeInfo.title, itemName)
     );
     if (exactBookMatchResults.length > 0) {
-      console.log(`Number of book results: ${bookResponse.data.items.length}`);
-      console.log(`Book Title: ${exactBookMatchResults[0].volumeInfo.title}`);
-      console.log(exactBookMatchResults[0].volumeInfo.imageLinks.thumbnail);
-      console.log(exactBookMatchResults[0].volumeInfo.previewLink);
-
       results.category = 'ToRead';
+      results.displayInformation = {
+        title: exactBookMatchResults[0].volumeInfo.title,
+        thumbnail: exactBookMatchResults[0].volumeInfo.imageLinks.thumbnail,
+        previewLink: exactBookMatchResults[0].volumeInfo.previewLink
+      };
       return results;
     }
 
-    // Check if it's a restaurant/cafe (Google Places API) with exact match
+    // Restaurant
     const exactPlaceMatchResults = placeResponse.data.candidates.filter(candidate =>
       exactMatch(candidate.name, itemName)
     );
     if (exactPlaceMatchResults.length > 0) {
-      console.log("Google Places API results: ", exactPlaceMatchResults);
-
       results.category = 'ToEat';
+      results.displayInformation = {
+        name: exactPlaceMatchResults[0].name,
+        address: exactPlaceMatchResults[0].formatted_address,
+        rating: exactPlaceMatchResults[0].rating
+      };
       return results;
     }
   } catch (error) {
-    // Catch any errors during API requests and log them
-    console.error('Error fetching data from APIs:', error.message);
-    results.errors.push(error.message); // Add error message to the results
+    results.errors.push(error.message); // Capture any errors
   }
 
-  // If no results match, return the default category as 'Uncategorized'
-  console.log(`Item could not be categorized: ${itemName}`);
   return results;
 };
 
