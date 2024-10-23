@@ -59,6 +59,15 @@ app.get('/', async(req, res) => {
   res.render('index', templateVars);
 });
 
+app.get('/tasks', async(req, res) => {
+  console.log("Route '/' hit");
+  const user = await getUserById(req);
+  console.log("in server.js, user =",user);
+
+  const templateVars = {user};
+  res.render('view-tasks', templateVars);
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

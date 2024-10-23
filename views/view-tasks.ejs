@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- replace "List" with variable -->
+    <title>"List" Tasks</title>
+    
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('includes') %>
+  </head>
+  <%- include('partials/_header') %>
+  <body>
+    <%- include('partials/_hero-banner') %>
+    <main>
+      <%- include('partials/_task-item', {completed: false}) %>
+      <%- include('partials/_task-item', {completed: false}) %>
+      <%- include('partials/_task-item', {completed: false}) %>
+      <%- include('partials/_task-item', {completed: false}) %>
+      <%- include('partials/_task-item', {completed: false}) %>
+    </main>
+    <%- include('partials/_footer') %>
+  </body>
+</html>
