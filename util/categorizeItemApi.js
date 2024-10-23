@@ -129,13 +129,17 @@ const categorizeItem = async (itemName, userLocation = '53.5461,-113.4938') => {
   };
 
   try {
-    const [movieResponse, bookResponse, placeResponse] = await Promise.all([
+    // const [ ebayResponse] = await Promise.all([
+    const [movieResponse, bookResponse, placeResponse, ebayResponse] = await Promise.all([
+      //TMBD API for movies
       axios.get('https://api.themoviedb.org/3/search/movie', {
         params: { api_key: process.env.TMDB_API_KEY, query: itemName }
       }),
+      //Google Books API
       axios.get('https://www.googleapis.com/books/v1/volumes', {
         params: { q: itemName, key: process.env.GOOGLE_BOOKS_API_KEY }
       }),
+      //Google Places API
       axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json', {
         params: {
           input: itemName,
@@ -143,6 +147,17 @@ const categorizeItem = async (itemName, userLocation = '53.5461,-113.4938') => {
           locationbias: `circle:2000@${userLocation}`,
           fields: 'formatted_address,name,rating,opening_hours,geometry',
           key: process.env.GOOGLE_PLACES_API_KEY
+        }
+      }),
+      //Ebay API
+      axios.get('https://api.ebay.com/buy/browse/v1/item_summary/search', {
+        params: {
+          q: itemName // The product name provided by the user
+        },
+        headers: {
+          'Authorization': `Bearer ${process.env.ebayOAuthToken}`,
+          'Content-Type': 'application/json',
+          'X-EBAY-C-MARKETPLACE-ID': 'EBAY_CA' // Target the Canadian marketplace
         }
       })
     ]);
@@ -186,10 +201,24 @@ const categorizeItem = async (itemName, userLocation = '53.5461,-113.4938') => {
       };
       return results;
     }
+
+    // EBay
+    if (ebayResponse.data.itemSummaries && ebayResponse.data.itemSummaries.length > 0) {
+        results.category = 'ToBuy';
+        results.displayInformation = {
+          title: ebayResponse.data.itemSummaries[0].title,
+          price: ebayResponse.data.itemSummaries[0].price.value,
+          image: ebayResponse.data.itemSummaries[0].image.imageUrl,
+          itemUrl: ebayResponse.data.itemSummaries[0].itemWebUrl
+        };
+      return results;
+    }
+
   } catch (error) {
     results.errors.push(error.message); // Capture any errors
   }
 
+  // Uncategorized
   return results;
 };
 

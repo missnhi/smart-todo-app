@@ -41,8 +41,6 @@ async function handleSubmit(event) {
       }
 
       // Display additional information on the screen
-      console.log("*********************************API response display information:", data.category.displayInformation);
-
       if (data.category.displayInformation) {
         displayInformationOnScreen(data.category.displayInformation);
       }
@@ -64,6 +62,8 @@ function displayInformationOnScreen(info) {
   // Clear any previous data
   displayDiv.innerHTML = '';
   console.log(info);
+
+  // For Movies or Series
   if (info.title) {
     displayDiv.innerHTML += `<h3>Title: ${info.title}</h3>`;
   }
@@ -72,6 +72,7 @@ function displayInformationOnScreen(info) {
     displayDiv.innerHTML += `<p><strong>Overview:</strong> ${info.overview}</p>`;
   }
 
+  // For Books
   if (info.releaseDate) {
     displayDiv.innerHTML += `<p><strong>Release Date:</strong> ${info.releaseDate}</p>`;
   }
@@ -84,6 +85,7 @@ function displayInformationOnScreen(info) {
     displayDiv.innerHTML += `<p><a href="${info.previewLink}" target="_blank">Preview this Book</a></p>`;
   }
 
+  // For Restaurants
   if (info.name) {
     displayDiv.innerHTML += `<h3>Restaurant Name: ${info.name}</h3>`;
   }
@@ -94,5 +96,18 @@ function displayInformationOnScreen(info) {
 
   if (info.rating) {
     displayDiv.innerHTML += `<p><strong>Rating:</strong> ${info.rating}</p>`;
+  }
+
+  // For eBay products
+  if (info.price) {
+    displayDiv.innerHTML += `<p><strong>Price:</strong> $${info.price}</p>`;
+  }
+
+  if (info.image) {
+    displayDiv.innerHTML += `<img src="${info.image}" alt="Product Image" />`;
+  }
+
+  if (info.itemUrl) {
+    displayDiv.innerHTML += `<p><a href="${info.itemUrl}" target="_blank">View this Product on eBay</a></p>`;
   }
 }
