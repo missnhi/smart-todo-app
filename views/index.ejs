@@ -17,20 +17,37 @@
       <i class="fa-solid fa-chevron-down"></i>
     </a>
     <main>
-        <%- include('partials/todo_input_form.ejs') %>
 
       <section class="home-quick-todo">
         <h1>Quick Add a ToDo</h1>
-        <form>
-          <input class="task-name" type="text" placeholder="What do you need to do?" />
-          <select class="select-list" name="lists">
-              <optgroup label="Add to list">
-                <option value="" selected disabled hidden>Add to list</option>
-                <option value="create new list">+ Create a new list</option>
-              </optgroup>
-          </select>
-          <button class="default-btn" type="submit">+ Add ToDo</button>
-        </form>
+          <form id="todoForm" action="/api/todo/categorize" method="POST">
+            <input id="itemName" name="itemName" class="task-name" type="text" placeholder="What do you need to do?" required/>
+              <button class="default-btn" type="submit">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  Search
+              </button>
+          </form>
+
+          <!-- Section: Category announcement and manual change dropdown -->
+          <div>
+              <label for="categoryDropdown">This will be added to:</label>
+              <select id="categoryDropdown" class="select-list" name="lists" >
+                  <option value="ToWatch">Watchlist</option>
+                  <option value="ToEat">Restaurants</option>
+                  <option value="ToRead">Books</option>
+                  <option value="ToBuy">Products</option>
+                  <option value="Uncategorized">Uncategorized</option>
+              </select>
+
+              <button id="manualSubmitButton" class="default-btn" type="submit">
+                  Confirm
+              </button>
+          </div>
+
+          <!-- Add a section to display the information -->
+          <div id="displayInformation">
+              <h6>This is display info</h6>
+          </div>
       </section>
 
 
@@ -85,5 +102,6 @@
       </section>
     </main>
     <%- include('partials/_footer') %>
+    <script src="/scripts/dropdown-category.js"></script>
   </body>
 </html>

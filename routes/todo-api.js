@@ -7,22 +7,18 @@ const router = express.Router();
 // Route for adding a new to-do item
 router.post('/todo/categorize', async(req, res) => {
   const itemName = req.body.itemName; //from todo_input_form.ejs
-  // console.log("Request body:", req.body);
-
   if (!itemName) {
     return res.status(400).json({error: 'Item name is required'});
   }
 
   try {
-    console.log(itemName); //error checking
-
+    // console.log(itemName); //error checking
     const category = await categorizeItem(itemName);
 
     console.log("Category: ", category);
 
     // will change with actual database logic)
     const newTodo = {id: Date.now(), name: itemName, category: category};
-    console.log("NewTodo:", newTodo);
 
     return res.status(200).json({ category });
   } catch (error) {

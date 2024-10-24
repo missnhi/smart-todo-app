@@ -40,7 +40,7 @@ async function handleSubmit(event) {
         console.log("Dropdown value after:", categoryDropdown.value);
       }
 
-      // Display additional information on the screen
+      // call display additional information on the screen
       if (data.category.displayInformation) {
         displayInformationOnScreen(data.category.displayInformation);
       }
