@@ -7,6 +7,7 @@ const {sessionMiddleware} = require('./middleware/cookie-middleware');
 const express = require('express');
 const morgan = require('morgan');
 const { getUserById } = require('./routes/_helpers.js');
+const { changeComplete, getAllTasks} = require('./db/database-actions.js');
 
 const PORT = process.env.SERVER_PORT || 8080;
 const app = express();
@@ -18,7 +19,7 @@ const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users.js');
 const authRoutes = require('./routes/authentication.js');
 const todoApiRoutes = require('./routes/todo-api.js');
-
+const todoRoutes = require('./routes/todos.js');
 
 app.set('view engine', 'ejs');
 
@@ -48,6 +49,7 @@ app.use('/api/users', userApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/auth', authRoutes);
 app.use('/api', todoApiRoutes);
+app.use('/todos', todoRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -61,24 +63,6 @@ app.get('/', async(req, res) => {
 
   const templateVars = {user};
   res.render('index', templateVars);
-});
-
-app.get('/tasks', async(req, res) => {
-  console.log("Route '/' hit");
-  const user = await getUserById(req);
-  console.log("in server.js, user =",user);
-
-  const templateVars = {user};
-  res.render('view-tasks', templateVars);
-});
-
-app.get('/add-todo', async(req, res) => {
-  console.log("Route '/' hit");
-  const user = await getUserById(req);
-  console.log("in server.js, user =",user);
-
-  const templateVars = {user};
-  res.render('add-todo', templateVars);
 });
 
 app.listen(PORT, () => {

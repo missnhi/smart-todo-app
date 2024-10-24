@@ -8,16 +8,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%- include('includes') %>
+
+    <script>
+      console.log(<%- JSON.stringify(todos) %>);
+      const listData = <%- JSON.stringify(todos) %>;
+    </script>
   </head>
   <%- include('partials/_header') %>
   <body>
-    <%- include('partials/_hero-banner') %>
+    <%- include('partials/_hero-banner', {headerText}) %>
     <main>
-      <%- include('partials/_task-item', {completed: false}) %>
-      <%- include('partials/_task-item', {completed: false}) %>
-      <%- include('partials/_task-item', {completed: false}) %>
-      <%- include('partials/_task-item', {completed: false}) %>
-      <%- include('partials/_task-item', {completed: false}) %>
+      <h3>Filter To-Dos</h3>
+      <form>
+        <select class="select-list" name="sort-by">
+          <option value="newest" selected disabled>Sort To-Dos By</option>
+          <option value="newest" >Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="AtoZ">A-Z</option>
+          <option value="ZtoA">Z-A</option>
+          <option value="completion">Completion</option>
+          <option value="due-date">Due Date</option>
+        </select>
+        <input type="checkbox" id="completed-only" name="completed-only" value="completed-only" checked>
+        <label for="completed-only">Completed</label>
+        <input type="checkbox" id="in-progress-only" name="in-progress-only" value="in-progress-only" checked>
+        <label for="in-progress-only">In Progress</label>
+
+      </form>
+      <section id="display-tasks">
+
+      </section>
     </main>
     <%- include('partials/_footer') %>
   </body>

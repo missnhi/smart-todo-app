@@ -11,13 +11,13 @@
   <%- include('partials/_header') %>
   <body>
     <!-- TODO: Remove Cards and todo items to components -->
-    <%- include('partials/_hero-banner') %>
+    <%- include('partials/_hero-banner', {headerText: "INSPIRING, ELEVATING TO-DO LIST."}) %>
     <a id="home-cta" href="#home-cta">
       <p>Explore Your To-Dos Below</p>
       <i class="fa-solid fa-chevron-down"></i>
     </a>
     <main>
-        <%- include('partials/todo_input_form.ejs') %>
+      <%- include('partials/todo_input_form.ejs') %>
 
       <section class="home-quick-todo">
         <h1>Quick Add a ToDo</h1>

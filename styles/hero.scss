@@ -12,6 +12,10 @@
     width: 80%;
     display: flex;
     justify-content: space-between;
+
+    .hero-text{
+      width: -webkit-fill-available;
+    }
   }
 
 
