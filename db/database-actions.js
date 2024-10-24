@@ -19,7 +19,7 @@ const changeComplete = function(todo) {
   })
 }
 
-const getAllTasks = (listName, limit = 5, userID = 1) => {
+const getAllTasksInList = (listName, limit = 5, userID = 1) => {
   let queryString = `
   SELECT tasks.*
   FROM tasks
@@ -34,9 +34,20 @@ const getAllTasks = (listName, limit = 5, userID = 1) => {
   return db.query(queryString, [userID, listName, limit]).then((res) => {return res.rows}).catch(err => {console.log(err.message)});
 }
 
-getAllTasks('To Watch', 5, 1);
+const getAllTasks = (limit = 5, userID = 1) => {
+  let queryString = `
+  SELECT *
+  FROM tasks
+  WHERE tasks.user_id = $1
+  ORDER BY tasks.complete
+  LIMIT $2;
+  `;
+
+  return db.query(queryString, [userID, limit]).then((res) => {return res.rows}).catch(err => {console.log(err.message)});
+}
 
 module.exports = {
   changeComplete,
+  getAllTasksInList,
   getAllTasks
 }
