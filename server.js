@@ -7,6 +7,7 @@ const {sessionMiddleware} = require('./middleware/cookie-middleware');
 const express = require('express');
 const morgan = require('morgan');
 const { getUserById } = require('./routes/_helpers.js');
+const { changeComplete, getAllTasks} = require('./db/database-actions.js');
 
 const PORT = process.env.SERVER_PORT || 8080;
 const app = express();
@@ -65,10 +66,11 @@ app.get('/', async(req, res) => {
 
 app.get('/tasks', async(req, res) => {
   console.log("Route '/' hit");
+  const todos = await getAllTasks("To Watch", 5, 1);
   const user = await getUserById(req);
   console.log("in server.js, user =",user);
 
-  const templateVars = {user};
+  const templateVars = {user, todos};
   res.render('view-tasks', templateVars);
 });
 
