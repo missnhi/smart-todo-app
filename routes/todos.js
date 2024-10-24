@@ -2,21 +2,23 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
-const { changeComplete, getAllTasksInList, getAllTasks} = require('../db/database-actions');
+const { changeComplete, getAllTasksInList, getAllTasks, getFilteredTasks} = require('../db/database-actions');
 const { getUserById } = require('./_helpers.js');
 
 //Create, Read, Update, Delete
 router.get('/', async (req, res) => {
   console.log("*************************");
+  // console.log('req', req);
+  console.log('req.body', req.query);
 
-  const todos = await getAllTasks(10000, req.session.user_id);
+  const todos = await getFilteredTasks(req.query, 1000, req.session.user_id);
   const user = await getUserById(req);
   console.log("in server.js, user =",user);
 
   const templateVars = {user, todos, headerText: "All To-Dos"};
   res.render('view-tasks', templateVars);
 
-  return res.status(200);
+  return todos;
 });
 
 //CREATE
@@ -42,6 +44,13 @@ router.post('/:id/update', async(req, res) => {
 
 router.post('/:id/mark-complete', async(req, res) => {
   
+});
+
+router.post('/filtered', async (req, res) => {
+  const todos = await getFilteredTasks(req.body, 1000, req.session.user_id);
+  res.json({data: todos})
+
+  return res.status(200);
 });
 
 //DELETE
