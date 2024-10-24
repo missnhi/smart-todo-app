@@ -49,23 +49,9 @@ $(document).ready(function () {
 
   loadTasks(listData);
 
-  //On filtering the data: get the filters, POST them to the server with the filters, and re-load the tasks based on the return query
-  $('.filter-todos').on('submit', function(event){
-    event.preventDefault();
-    const appliedFilters = $(this).serialize();
-    console.log(appliedFilters)
-    $.post('/todos/filtered', appliedFilters, (data) => {
-
-      console.log('data is:', data);
-
-      loadTasks(data.data);
-      console.log("loaded filtered data");
-    })
-
-  })
 
   //Handle updating the CSS and animating the task card
-  const markTaskComplete = (e) => {
+  function markTaskComplete(e) {
     const todoDisplay = $(e).closest('.todo-item-card');
     todoDisplay.toggleClass('completed-item');
 
@@ -83,8 +69,24 @@ $(document).ready(function () {
   }
 
   //call markTaskComplete on btn click
-  $('.todo-item button').on('click', function (e) {
+  $('body').on('click', '.todo-item button', function (e) {
     console.log('clicked ', e.target)
     markTaskComplete(e.target);
   })
+
+  //On filtering the data: get the filters, POST them to the server with the filters, and re-load the tasks based on the return query
+  $('.filter-todos').on('submit', function(event){
+    event.preventDefault();
+    const appliedFilters = $(this).serialize();
+    console.log(appliedFilters)
+    $.post('/todos/filtered', appliedFilters, (data) => {
+
+      console.log('data is:', data);
+      loadTasks(data.data);
+      console.log("loaded filtered data");
+    })
+
+  })
+
+  
 });
