@@ -24,6 +24,7 @@ body {
   min-height: 100vh;
   font-family: Nunito, sans-serif;
   font-weight: normal;
+  margin-left: 50px;
 
   background: rgb(250,214,190);
   background: linear-gradient(0deg, rgba(255,226,199,1) 0%, rgba(249,249,249,1) 75%);
@@ -89,7 +90,7 @@ p, .paragraph {
   top: -50px;
   p {
     margin-bottom: 0;
-    
+
   }
 
   &:hover{
