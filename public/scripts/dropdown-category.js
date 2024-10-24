@@ -23,7 +23,7 @@ async function handleSubmit(event) {
 
     const data = await response.json();
     console.log("API response structute:", data); // Log the API response to verify category
-    // EX of data = { category : { category:"ToRead",  errors : [] } }
+    // EX of data = { result : { category:"ToRead",  errors : [] } }
 
     if (response.ok) {
       // check if errors are present in the response
@@ -35,14 +35,14 @@ async function handleSubmit(event) {
         // if no errors, update the dropdown based on the categorized result
         const categoryDropdown = document.getElementById("categoryDropdown");
         console.log("Dropdown value before:", categoryDropdown.value);
-        console.log("API returned category:", data.category.category);
-        categoryDropdown.value = data.category.category; // Update dropdown value
+        console.log("API returned category:", data.result.category);
+        categoryDropdown.value = data.result.category; // Update dropdown value
         console.log("Dropdown value after:", categoryDropdown.value);
       }
 
       // call display additional information on the screen
-      if (data.category.displayInformation) {
-        displayInformationOnScreen(data.category.displayInformation);
+      if (data.result.displayInformation) {
+        displayInformationOnScreen(data.result.displayInformation);
       }
 
     } else {

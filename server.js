@@ -59,7 +59,7 @@ app.use('/todos', todoRoutes);
 app.get('/', async(req, res) => {
   console.log("Route '/' hit");
   const user = await getUserById(req);
-  console.log("in server.js, user =",user);
+  // console.log("in server.js, user =",user);
 
   const templateVars = {user};
   res.render('index', templateVars);

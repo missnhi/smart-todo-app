@@ -1,5 +1,6 @@
 // _helpers.js
 const { getUsers, getUserByIdQuery } = require('../db/queries/users.js');
+const { getTaskByNameQuery } = require('../db/queries/tasks.js')
 
 // Function to generate a random string
 const generateRandomString = () => {
@@ -13,8 +14,16 @@ const getUserById = async (req) => {
 
   const user = await getUserByIdQuery(userId);
 
-  console.log("in _helpers.js, getUsersByIdQuery() = ",user);
+  // console.log("in _helpers.js, getUsersByIdQuery() = ",user);
   return user;
 };
 
-module.exports = { generateRandomString, getUserById, getUsers };
+//Function to check if the item is already in the database task
+const itemAlreadyExist = async (itemName) => {
+  const tasks = await getTaskByNameQuery(itemName);
+  console.log("in _helpers.js Number of tasks: ", tasks);
+  //return true if item already exist, false if not exist
+  return tasks.length > 0;
+};
+
+module.exports = { generateRandomString, getUserById, getUsers, itemAlreadyExist };
