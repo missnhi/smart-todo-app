@@ -37,7 +37,7 @@ router.get('/:id', async(req, res) => {
 
 //UPDATE
 router.post('/:id/update', async(req, res) => {
-  
+  console.log("updated", req.params.id)
 });
 
 router.post('/:id/mark-complete', async(req, res) => {

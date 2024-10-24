@@ -78,4 +78,8 @@
   position: relative;
   left: -3rem;
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 }

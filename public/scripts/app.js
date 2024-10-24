@@ -6,7 +6,7 @@ $(document).ready(function () {
     const todoDisplay = $(e).closest('.todo-item-card');
     todoDisplay.toggleClass('completed-item');
 
-    if (todoDisplay.hasClass('completed-item')) {
+    /* if (todoDisplay.hasClass('completed-item')) {
       setTimeout(() => {
         $(e).closest('.todo-item').animate({
           left: "2500",
@@ -15,12 +15,13 @@ $(document).ready(function () {
           $(e).closest('.todo-item').remove();
           console.log("animation complete");
         })
-      }, 250);
-    }
+      }, 250); 
+    }*/
   }
 
   //call markTaskComplete on btn click
   $('.todo-item button').on('click', function (e) {
+    console.log('clicked ', e.target)    
     markTaskComplete(e.target);
   })
 

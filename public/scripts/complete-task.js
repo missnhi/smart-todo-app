@@ -3,7 +3,7 @@ $(document).ready(function() {
     const todoDisplay = $(e).closest('.todo-item-card');
     todoDisplay.toggleClass('completed-item');
 
-    if(todoDisplay.hasClass('completed-item')){
+    /* if(todoDisplay.hasClass('completed-item')){
       setTimeout(() => {
         $(e).closest('.todo-item').animate({
           left: "2500",
@@ -13,7 +13,7 @@ $(document).ready(function() {
           console.log("animation complete");
         })
       }, 250);
-    }
+    } */
   } 
 
   $('.todo-item button').on('click', function(e) {
