@@ -39,6 +39,9 @@
 
       <section class="home-lists">
         <h1>What have you got to do?</h1>
+        <% for(const list of lists) { %>
+          <h5><%- list.name %></h5>
+        <% } %>
         <div class="flex-row-container">
           <!-- This will loop over all the lists for a user and display them. For styling purposes, they're hard-coded at the moment -->
           <div class="todo-list-card">

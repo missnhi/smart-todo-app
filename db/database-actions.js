@@ -153,9 +153,21 @@ const getFilteredTasks = (options, limit = 5, userID = 1) => {
   return db.query(queryString, queryParams).then((res) => {console.log(res.rows); return res.rows}).catch(err => {console.log(err.message)});
 }
 
+const getAllLists = (userID) => {
+  let queryString = `
+  SELECT *
+  FROM task_lists
+  WHERE user_id = $1
+  ORDER BY name ASC;
+  `;
+
+  return db.query(queryString, [userID]).then((res) => {return res.rows}).catch(err => {console.log(err.message)});
+}
+
 module.exports = {
   changeComplete,
   getAllTasksInList,
   getAllTasks,
-  getFilteredTasks
+  getFilteredTasks,
+  getAllLists
 }

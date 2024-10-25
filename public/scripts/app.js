@@ -70,17 +70,30 @@ $(document).ready(function () {
       console.log("updated the db");
     })
 
-    /* if (todoDisplay.hasClass('completed-item')) {
-      setTimeout(() => {
-        $(e).closest('.todo-item').animate({
-          left: "2500",
-          opacity: "0"
-        }, 800, "swing", function () {
-          $(e).closest('.todo-item').remove();
-          console.log("animation complete");
-        })
-      }, 250); 
-    }*/
+    //use remove animation if on home screen (on the at-a-glance only)
+    if(location.pathname === '/'){
+
+      if (todoDisplay.hasClass('completed-item')) {
+        
+        setTimeout(() => {
+          $(e).closest('.todo-item').animate({
+            left: "2500",
+            opacity: "0"
+          }, 800, "swing", function () {
+            $(e).closest('.todo-item').remove();
+
+            console.log("animation complete");
+          });
+
+          setTimeout(() => {
+            const found = todosData.findIndex((el) => el.id == taskID.taskID);
+            todosData.splice(found, 1)
+            loadTasks(todosData)            
+          }, 300);
+        }, 250); 
+      }
+      
+    }
   }
 
   //call markTaskComplete on btn click
