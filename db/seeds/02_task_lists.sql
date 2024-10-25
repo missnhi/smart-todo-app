@@ -9,3 +9,4 @@ VALUES
 (2, 'To Read', 'reading.png', 'description'),
 (2, 'To Buy', 'shopping.png', 'description'),
 (2, 'To Eat','utensils.png','description');
+
