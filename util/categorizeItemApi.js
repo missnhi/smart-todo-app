@@ -169,12 +169,12 @@ const categorizeItem = async (itemName, userLocation = '53.5461,-113.4938') => {
     const exactMovieMatchResults = movieResponse.data.results.filter(movie =>
       exactMatch(movie.original_title, itemName)
     );
-    if (movieResult && movieResult.length > 0) {
+    if (exactMovieMatchResults.length > 0) {
       results.category = 'ToWatch';
       results.displayInformation = {
-        title: movieResult[0].original_title,
-        overview: movieResult[0].overview,
-        releaseDate: movieResult[0].release_date
+        title: exactMovieMatchResults[0].original_title,
+        overview: exactMovieMatchResults[0].overview,
+        releaseDate: exactMovieMatchResults[0].release_date
       };
       return results;
     }

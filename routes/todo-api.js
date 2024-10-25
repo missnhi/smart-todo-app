@@ -2,7 +2,7 @@
 
 const express = require('express');
 const {categorizeItem} = require("../util/categorizeItemApi");
-const {getUserById, itemAlreadyExist} = require("./_helpers");
+const {getUserById, itemAlreadyExist, getTaskID} = require("./_helpers");
 const router = express.Router();
 const db = require('../db/connection');
 
@@ -72,18 +72,77 @@ router.post('/todo/categorize', async(req, res) => {
   }
 
 });
+/*
+************************************************
+* 2 routes for user to manually overriding the category of a to-do item
+ */
+// Route to get the item ID based on the item name
+router.get('/todo/item-id', async (req, res) => {
+  const itemName = req.query.itemName;
+  console.log(`router.get('/todo/item-id) ItemName = '${itemName}'` );
 
-// route for overriding the category of a to-do item
-router.put('/todo/:id/category', (req, res) => {
+  try {
+    //call the query to get the task ID from the backend.
+    const itemId = await getTaskID(itemName);
+    console.log(`itemId = await getTaskID(itemName)= '${itemId}'` );
+
+    if (!itemId) {
+      return res.status(404).json({ error: 'route todo/item-id: Item not found' });
+    }
+
+    return res.status(200).json({ itemId: itemId });
+  } catch (error) {
+    console.error('Error fetching item ID:', error);
+    return res.status(500).json({ error: 'route todo/item-id: Failed to fetch item ID' });
+  }
+});
+//Route to update the category "list_id" of a specific task
+router.put('/todo/:id/category', async (req, res) => {
   const newCategory = req.body.newCategory;
+  console.log("New Category: ", newCategory);
+
+  const itemId = req.params.id;
+  console.log("the Id of the item: ", itemId);
+
   if (!newCategory) {
     return res.status(400).json({ error: 'New category is required' });
   }
 
-  // Simulate updating the category of the to-do item (replace with actual database logic)
-  const updatedTodo = { id: req.params.id, category: newCategory };
+  try {
+    // Retrieve the new list_id based on the new category
+    let new_list_id;
+    if (newCategory === "ToWatch") {
+      new_list_id = 1;
+    } else if (newCategory === "ToRead") {
+      new_list_id = 2;
+    } else if (newCategory === "ToBuy") {
+      new_list_id = 3;
+    } else if (newCategory === "ToEat") {
+      new_list_id = 4;
+    } else {
+      new_list_id = null;
+    }
 
-  return res.status(200).json({ message: 'Category updated', todo: updatedTodo });
+    // Update the category in the database
+    const query = `\
+      UPDATE tasks
+      SET list_id = $1
+      WHERE id = $2
+      RETURNING *;
+    `;
+    const values = [new_list_id, itemId];
+
+    const result = await db.query(query, values);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Item not found' });
+    }
+
+    return res.status(200).json({ message: 'Category updated', todo: result.rows[0] });
+  } catch (error) {
+    console.error('Error updating category:', error);
+    return res.status(500).json({ error: 'Failed to update category' });
+  }
 });
 
 module.exports = router;
