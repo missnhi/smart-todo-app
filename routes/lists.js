@@ -45,7 +45,7 @@ router.get('/:id', async(req, res) => {
 
 
   const templateVars = {user, todos, headerText: req.params.id, lists};
-  res.render('view-tasks', templateVars);
+  res.render('view-tasks-list', templateVars);
 });
 
 //UPDATE

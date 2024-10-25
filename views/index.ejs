@@ -37,10 +37,11 @@
           <% 
           if(lists.length > 0){ 
             for(const list of lists) { %>
-              <%- include('partials/_todo-list-card', {listName: list.name, listIcon: 'flower-icon.png'}) %>
+              <%- include('partials/_todo-list-card', {listName: list.name, listIcon: list.icon_url}) %>
           <% }
            } else { %>
-              <%- include('partials/_todo-list-card', {listName: 'Creat A New List', listIcon: 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'}) %>
+              <!-- <%- include('partials/_todo-list-card', {listName: 'Create A New List', listIcon: '/assets/icons/question.png'}) %> -->
+               <a href="/lists/new">You haven't got any list yet! Create one now →</a>
            <% } %>
         </div>
       </section>
