@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
-const { changeComplete, getAllTasksInList, addTask, getFilteredTasks} = require('../db/database-actions');
+const { changeComplete, getAllTasksInList, addTask, getFilteredTasks, getAllLists} = require('../db/database-actions');
 const { getUserById } = require('./_helpers.js');
 
 //Create, Read, Update, Delete
@@ -13,9 +13,9 @@ router.get('/', async (req, res) => {
 
   const todos = await getFilteredTasks(req.query, 1000, req.session.user_id);
   const user = await getUserById(req);
-  console.log("in server.js, user =",user);
+  const lists = await getAllLists(req.session.user_id);
 
-  const templateVars = {user, todos, headerText: "All To-Dos"};
+  const templateVars = {user, todos, headerText: "All To-Dos", lists};
   res.render('view-tasks', templateVars);
 
   return todos;
@@ -41,9 +41,10 @@ router.get('/:id', async(req, res) => {
   //req params must match the name of the list
   const todos = await getAllTasksInList({}, req.params.id, 100, req.session.user_id);
   const user = await getUserById(req);
-  console.log("in server.js, user =",user);
+  const lists = await getAllLists(req.session.user_id);
 
-  const templateVars = {user, todos, headerText: req.params.id};
+
+  const templateVars = {user, todos, headerText: req.params.id, lists};
   res.render('view-tasks', templateVars);
 });
 

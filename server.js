@@ -20,7 +20,7 @@ const usersRoutes = require('./routes/users.js');
 const authRoutes = require('./routes/authentication.js');
 const todoApiRoutes = require('./routes/todo-api.js');
 const todoRoutes = require('./routes/todos.js');
-
+const listRoutes = require('./routes/lists.js');
 app.set('view engine', 'ejs');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -50,6 +50,8 @@ app.use('/users', usersRoutes);
 app.use('/auth', authRoutes);
 app.use('/api', todoApiRoutes);
 app.use('/todos', todoRoutes);
+app.use('/lists', listRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page

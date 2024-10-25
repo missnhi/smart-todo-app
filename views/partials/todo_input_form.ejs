@@ -4,20 +4,6 @@ It is displayed in a dropdown for manual changes if neede.
 
 How: add Javascript to make an API call
 -->
-<%- include('partials/todo_input_form.ejs') %>
-
-
-<!-- <form>
-          <input class="task-name" type="text" placeholder="What do you need to do?" />
-          <select class="select-list" name="lists">
-              <optgroup label="Add to list">
-                <option value="" selected disabled hidden>Add to list</option>
-                <option value="create new list">+ Create a new list</option>
-              </optgroup>
-          </select>
-          <button class="default-btn" type="submit">+ Add ToDo</button>
-        </form> -->
-
 <form id="todoForm" action="/api/todo/categorize" method="POST">
   <span class="inout-textbox">
     <label for="itemName" class="form-label">Add a To-Do</label>
@@ -30,7 +16,6 @@ How: add Javascript to make an API call
       required
     />
   </span>
-  
 
   <!-- Category announcement and manual change dropdown -->
   <span>
@@ -48,16 +33,18 @@ How: add Javascript to make an API call
     <i class="fa-solid fa-magnifying-glass"></i>
     Search
   </button>
+  <button id="manualChangeButton" class="btn btn-warning-outline" type="submit">
+    Confirm Change
+  </button>
 </form>
 
 <!-- Add a section to display the information -->
- <span class="display-api-info">
-     <div id="displayInformation">
-       <h6>This is display info</h6>
-     </div>
-     
-     <button id="confirm-choice-button" type="submit" class="default-btn">
-       Confirm
-     </button>
- </span>
+<span class="display-api-info">
+  <div id="displayInformation">
+    <h6>This is display info</h6>
+  </div>
 
+  <button id="confirm-choice-button" type="submit" class="default-btn">
+    + Add Task
+  </button>
+</span>

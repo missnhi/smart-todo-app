@@ -19,22 +19,11 @@
       <p>Explore Your To-Dos Below</p>
       <i class="fa-solid fa-chevron-down"></i>
     </a>
-    <main>
-      
+    <main>     
 
       <section class="home-quick-todo">
         <h1>Quick Add a ToDo</h1>
-          <%- include('partials/todo_input_form.ejs') %>
-        <!-- <form>
-          <input class="task-name" type="text" placeholder="What do you need to do?" />
-          <select class="select-list" name="lists">
-              <optgroup label="Add to list">
-                <option value="" selected disabled hidden>Add to list</option>
-                <option value="create new list">+ Create a new list</option>
-              </optgroup>
-          </select>
-          <button class="default-btn" type="submit">+ Add ToDo</button>
-        </form> -->
+          <%- include('partials/todo_input_form') %>
       </section>
 
       <section class="home-todos-glance">
