@@ -2,7 +2,7 @@
 <html>
   <head>
     <!-- replace "List" with variable -->
-    <title>"List" Tasks</title>
+    <title><%- singleTask.name %> To-Do</title>
 
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,9 +12,18 @@
   </head>
   <%- include('partials/_header') %>
   <body>
-    <%- include('partials/_hero-banner', {headerText}) %>
+    <%- include('partials/_hero-banner', {headerText: "To Do:<br>" + headerText}) %>
     <main>
-      
+      <span class="icon-tags">
+        <div class="completed-tag"><%- singleTask.complete ? 'Completed' : 'In Progress' %></div>
+        <div class="list-tag"><%- singleTask.list_name ? singleTask.list_name : 'Uncategorized' %></div>
+        <div class="deadline-tag"><%- singleTask.due_date ? singleTask.due_date : 'No deadline!' %></div>
+      </span>
+      <div>
+        <h5>Description</h5>
+        <%- singleTask.description != 'null' ? singleTask.description : 'No description yet' %>
+      </div>
+      <button id="back-btn" class="default-btn" onclick="window.history.back()">← Back</button>
     </main>
     <%- include('partials/_footer') %>
   </body>

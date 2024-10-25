@@ -105,6 +105,15 @@ $(document).ready(function () {
     markTaskComplete(e.target);
   })
 
+  /* $('#mark-complete').on('click', function (e) {
+    const taskID = {taskID: $(e).attr('taskID')};
+    console.log(taskID)
+    $.post('/todos/mark-complete', taskID, ()=> {
+      console.log("updated the db");
+    })
+    .done(location.reload())
+  }) */
+
   //On filtering the data: get the filters, POST them to the server with the filters, and re-load the tasks based on the return query
   $('.filter-todos').on('submit', function(event){
     event.preventDefault();
