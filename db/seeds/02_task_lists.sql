@@ -1,6 +1,6 @@
 INSERT INTO task_lists (user_id, name, icon_url, description)
 VALUES
-(1, 'To Watch', './', 'description'),
-(1, 'To Read', './', 'description'),
-(1, 'To Buy', './', 'description'),
-(1, 'To Eat', './', 'description');
+(1, 'To Watch', 'watch.png', 'description'),
+(1, 'To Read', 'reading.png', 'description'),
+(1, 'To Buy', 'shopping.png', 'description'),
+(1, 'To Eat', 'utensils.png', 'description');

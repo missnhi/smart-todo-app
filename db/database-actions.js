@@ -169,7 +169,7 @@ const addTask = (user_id, list_id = null, name, due_date, description) => {
   $3,
   $4,
   false
-  )
+  );
   `;
 
   return db.query(queryString, [user_id, list_id, name, due_date, description]).then((res) => {console.log('res.rows task_lists', res.rows); return res.rows}).catch(err => {console.log(err.message)});

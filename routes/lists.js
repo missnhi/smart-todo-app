@@ -26,8 +26,8 @@ router.get('/new', async(req, res) => {
   const user = await getUserById(req);
   const newTodo = await addTask();
   
-  const templateVars = {user, headerText: "Create a To-Do"};
-  res.render('create-todo', templateVars);
+  const templateVars = {user, headerText: "Create a new list"};
+  res.render('create-list', templateVars);
 });
 
 router.post('/new', async(req, res) => {
