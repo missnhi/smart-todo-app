@@ -1,35 +1,9 @@
 // Client facing scripts here
 $(document).ready(function () {
-
-  //Handle updating the CSS and animating the task card
-  const markTaskComplete = (e) => {
-    const todoDisplay = $(e).closest('.todo-item-card');
-    todoDisplay.toggleClass('completed-item');
-
-    /* if (todoDisplay.hasClass('completed-item')) {
-      setTimeout(() => {
-        $(e).closest('.todo-item').animate({
-          left: "2500",
-          opacity: "0"
-        }, 800, "swing", function () {
-          $(e).closest('.todo-item').remove();
-          console.log("animation complete");
-        })
-      }, 250); 
-    }*/
-  }
-
-  //call markTaskComplete on btn click
-  $('.todo-item button').on('click', function (e) {
-    console.log('clicked ', e.target)    
-    markTaskComplete(e.target);
-  })
-
-
   const noHTML = (str) => {
     const regex = /\<\/?[a-z]*\>/gm;
 
-    return str.replaceAll(regex, '');
+    return String(str).replaceAll(regex, '');
   };
 
   const createTodo = (todoData) => {
@@ -60,49 +34,57 @@ $(document).ready(function () {
     return $newTodo;
   };
 
-  
+
   const renderAllTasks = (allTasks) => {
     for (const task of allTasks) {
       const $singleTask = createTodo(task);
       $('#display-tasks').append($singleTask);
     }
   };
-  
-  const loadTasks = () => {
-    console.log(listData);
-    $('#tasks').empty();
-    renderAllTasks(listData);
+
+  const loadTasks = (data) => {
+    $('#display-tasks').empty();
+    renderAllTasks(data);
   };
 
-  loadTasks();
+  loadTasks(listData);
 
-  //create a new task on form submission
-  /* $('#create-tweet').on('submit', function (event) {
+  //On filtering the data: get the filters, POST them to the server with the filters, and re-load the tasks based on the return query
+  $('.filter-todos').on('submit', function(event){
     event.preventDefault();
+    const appliedFilters = $(this).serialize();
+    console.log(appliedFilters)
+    $.post('/todos/filtered', appliedFilters, (data) => {
 
-    const tweetContent = noHTML($(this).find('textarea').val().trim());
-    const serializedData = $(this).serialize();
+      console.log('data is:', data);
 
-    //check that the form field actually has content before allowing it to post
-    if (!tweetContent) {
-      $('.tweet-warning span').text('There\'s nothing there!');
-      $('.tweet-warning').css({ display: "flex", opacity: 1 });
-    } else if (tweetContent.length > 140) {
-      $('.tweet-warning span').text('Your Tweet is too long!');
-      $('.tweet-warning').css({ display: "flex", opacity: 1 });
-    } else {
-      $.post('/tweets', serializedData, () => {
-        $(this).find('textarea').val('');
-        $('.tweet-output output').val('140');
+      loadTasks(data.data);
+      console.log("loaded filtered data");
+    })
 
-        $('.tweet-warning').css({ opacity: 0 });
+  })
 
-        setTimeout(function () {
-          $('.tweet-warning').css({ display: "none" });
-        }, 300);
+  //Handle updating the CSS and animating the task card
+  const markTaskComplete = (e) => {
+    const todoDisplay = $(e).closest('.todo-item-card');
+    todoDisplay.toggleClass('completed-item');
 
-        loadTweets();
-      });
-    }
-  }); */
+    /* if (todoDisplay.hasClass('completed-item')) {
+      setTimeout(() => {
+        $(e).closest('.todo-item').animate({
+          left: "2500",
+          opacity: "0"
+        }, 800, "swing", function () {
+          $(e).closest('.todo-item').remove();
+          console.log("animation complete");
+        })
+      }, 250); 
+    }*/
+  }
+
+  //call markTaskComplete on btn click
+  $('.todo-item button').on('click', function (e) {
+    console.log('clicked ', e.target)
+    markTaskComplete(e.target);
+  })
 });
