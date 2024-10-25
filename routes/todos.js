@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
   const lists = await getAllLists(req.session.user_id);
 
   const templateVars = {user, todos, headerText: "All To-Dos", lists};
-  res.render('view-tasks', templateVars);
+  res.render('view-tasks-list', templateVars);
 
   return todos;
 });

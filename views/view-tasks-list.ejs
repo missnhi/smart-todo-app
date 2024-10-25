@@ -2,7 +2,7 @@
 <html>
   <head>
     <!-- replace "List" with variable -->
-    <title>"List" Tasks</title>
+    <title><%- headerText %></title>
 
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -23,11 +23,9 @@
         <div class="flex-row-container">
           <% if(lists.length > 0){ for(const list of lists) { %> <%-
           include('partials/_todo-list-card', {listName: list.name, listIcon:
-          '/assets/flower-icon.png'}) %> <% } } else { %> <%-
+          list.icon_url}) %> <% } } else { %> <%-
           include('partials/_todo-list-card', {listName: 'Creat A New List',
-          listIcon:
-          'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'})
-          %> <% } %>
+          listIcon: '/icons/question.png'}) %> <% } %>
         </div>
       </section>
 
