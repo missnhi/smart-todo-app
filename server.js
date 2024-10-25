@@ -63,7 +63,6 @@ app.get('/', async(req, res) => {
   const lists = await getAllLists(req.session.user_id);
   console.log('lists are:', lists);
   const user = await getUserById(req);
-
   const templateVars = {user, todos, lists};
   res.render('index', templateVars);
 });
