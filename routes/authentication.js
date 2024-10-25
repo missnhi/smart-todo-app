@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const db = require('../db/connection');
 const { generateRandomString, getUserById, getUsers } = require('./_helpers');
 
+//error checking if this route is hit
 router.get('/', async (req, res) => {
   console.log("*************************");
   return res.status(200);

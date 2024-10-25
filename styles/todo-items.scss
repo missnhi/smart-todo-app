@@ -21,7 +21,7 @@
     &.completed-item {
       background-color: #757c60;
       color: #fff;
-      
+
       &:not(i) {
         text-decoration: line-through;
       }
@@ -45,7 +45,7 @@
       }
 
       img {
-        visibility: hidden;        
+        visibility: hidden;
         object-fit: contain;
         height: 100%;
       }
@@ -86,3 +86,4 @@
     outline: none;
   }
 }
+
