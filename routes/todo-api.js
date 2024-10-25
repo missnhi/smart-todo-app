@@ -14,22 +14,22 @@ router.post('/todo/categorize', async(req, res) => {
     return res.status(400).json({error: 'Item name is required'});
   }
 
+  if (await itemAlreadyExist(itemName)) {
+    //return error 409 (Conflict)
+    return res.status(409).json({error: 'Item_Already_Exists'});
+  }
+
   try {
     // console.log(itemName); //error checking
     const result = await categorizeItem(itemName);
 
     // console.log("Category object: ", result);
-    console.log("Category: ", result.category);
-    console.log("displayInformation: ", result.displayInformation);
-
-
-    if (itemAlreadyExist(itemName)) {
-      return res.status(200).json({error: 'item Already Exist'});
-    }
-
+    console.log("in todo-api.js, Category: ", result.category);
+    console.log("in todo-api.js, displayInformation: ", result.displayInformation);
     // will change with actual database logic)
     const user = await getUserById(req);
-    console.log("in todo-api.js, user.id =",user.id);
+
+    console.log("in todo-api.js, user =",user);
 
     // Insert the new task into the database, table tasks
     let list_id;
@@ -56,6 +56,7 @@ router.post('/todo/categorize', async(req, res) => {
     const values = [user.id, list_id, itemName, descriptionJSON];
 
     // const descriptionObjectparse = JSON.parse(descriptionJSON);
+
     try {
       await db.query(query, values);
       console.log("Successfully insert the new task:");
@@ -69,6 +70,7 @@ router.post('/todo/categorize', async(req, res) => {
     console.error('Error categorizing item:', error);
     return res.status(500).json({ error: 'Failed to categorize item' });
   }
+
 });
 
 // route for overriding the category of a to-do item
