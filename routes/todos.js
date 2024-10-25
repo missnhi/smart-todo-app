@@ -38,6 +38,7 @@ router.get('/:id', async(req, res) => {
 });
 
 //UPDATE
+//filter the tasks in a given list
 router.post('/:id/filtered', async(req, res) => {
   const todos = await getAllTasksInList(req.body, req.params.id, 1000, req.session.user_id);
   res.json({data: todos})
@@ -45,6 +46,7 @@ router.post('/:id/filtered', async(req, res) => {
   return res.status(200);
 });
 
+//filter all tasks by the query params
 router.post('/filtered', async (req, res) => {
   const todos = await getFilteredTasks(req.body, 1000, req.session.user_id);
   res.json({data: todos})
@@ -52,8 +54,8 @@ router.post('/filtered', async (req, res) => {
   return res.status(200);
 });
 
+//Mark a task as complete from client side and update db
 router.post('/mark-complete', async (req, res) => {
-  console.log(req.body);
   const updateRow = await changeComplete(req.session.user_id, req.body.taskID);
 
   return res.status(200);

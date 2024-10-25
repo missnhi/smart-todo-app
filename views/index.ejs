@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%- include('includes') %>
+    <script>
+      const listData = <%- JSON.stringify(todos) %> || {};
+    </script>
 
   </head>
   <%- include('partials/_header') %>
@@ -77,11 +80,8 @@
       </section>
 
       <section class="home-todos-glance">
-        <h1>ToDos At-A-Glance</h1>
-        <%- include('partials/_task-item', {completed: true}) %>
-        <%- include('partials/_task-item', {completed: false}) %>
-        <%- include('partials/_task-item', {completed: false}) %>
-        <%- include('partials/_task-item', {completed: false}) %>
+        <h1>To-Dos At-A-Glance</h1>
+        <section id="display-tasks"></section>
       </section>
     </main>
     <%- include('partials/_footer') %>
