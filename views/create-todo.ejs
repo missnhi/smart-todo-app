@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Create new To-Do</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('includes') %>
+  </head>
+  <%- include('partials/_header') %>
+  <body>
+    <%- include('partials/_hero-banner', {headerText}) %>
+    <main>
+      <h5>What do you want to do?</h5>
+      <form>
+        <input
+          class="task-name"
+          type="text"
+          placeholder="What do you need to do?"
+        />
+        <select class="select-list" name="lists">
+          <optgroup label="Add to list">
+            <option value="" selected disabled hidden>Add to list</option>
+            <option value="create new list">+ Create a new list</option>
+          </optgroup>
+        </select>
+        <textarea
+          name="description"
+          placeholder="Describe your to-do"
+        ></textarea>
+        <label for="start">Start date:</label>
+
+        <input
+          type="datetime-local"
+          id="start"
+          name="trip-start"
+        />
+        <button class="default-btn" type="submit">+ Add ToDo</button>
+      </form>
+    </main>
+    <%- include('partials/_footer') %>
+  </body>
+</html>

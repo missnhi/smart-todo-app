@@ -7,7 +7,7 @@ const {sessionMiddleware} = require('./middleware/cookie-middleware');
 const express = require('express');
 const morgan = require('morgan');
 const { getUserById } = require('./routes/_helpers.js');
-const { changeComplete, getAllTasks} = require('./db/database-actions.js');
+const { getFilteredTasks, getAllLists } = require('./db/database-actions.js');
 
 const PORT = process.env.SERVER_PORT || 8080;
 const app = express();
@@ -58,10 +58,12 @@ app.use('/todos', todoRoutes);
 
 app.get('/', async(req, res) => {
   console.log("Route '/' hit");
-  const user = await getUserById(req);
-  // console.log("in server.js, user =",user);
 
-  const templateVars = {user};
+  const todos = await getFilteredTasks({'sort-by': 'newest-first','in-progress-only': 'in-progress-only'}, 4, req.session.user_id);
+  const lists = await getAllLists(req.session.user_id);
+  console.log('lists are:', lists);
+  const user = await getUserById(req);
+  const templateVars = {user, todos, lists};
   res.render('index', templateVars);
 });
 

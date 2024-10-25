@@ -10,7 +10,7 @@
     <%- include('includes') %>
 
     <script>
-      const listData = <%- JSON.stringify(todos) %>;
+      const listData = <%- JSON.stringify(todos) %> || {};
     </script>
   </head>
   <%- include('partials/_header') %>
@@ -18,11 +18,11 @@
     <%- include('partials/_hero-banner', {headerText}) %>
     <main>
       <h3>Filter To-Dos</h3>
-      <form action='/todos' method="POST" class="filter-todos">
-        <select class="select-list" name="sort-by">
-          <option value="default-disabled" selected disabled>Sort To-Dos By</option>
-          <option value="newest-first">Newest</option>
-          <option value="oldest-first">Oldest</option>
+      <form action='' method="POST" class="filter-todos">
+        <label for="filter-todos">Sort To-Dos By:</label>
+        <select id="filter-todos" class="select-list" name="sort-by">
+          <option value="oldest-first">Oldest First</option>
+          <option value="newest-first">Newest First</option>
           <option value="AtoZ">A-Z</option>
           <option value="ZtoA">Z-A</option>
           <option value="completion">Completion</option>
