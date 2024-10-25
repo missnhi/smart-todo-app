@@ -22,8 +22,11 @@ router.get('/', async (req, res) => {
 });
 
 //CREATE
-router.post('/new', async(req, res) => {
-  
+router.get('/new', async(req, res) => {
+  const user = await getUserById(req);
+
+  const templateVars = {user, headerText: "Create a To-Do"};
+  res.render('create-todo', templateVars);
 });
 
 //READ

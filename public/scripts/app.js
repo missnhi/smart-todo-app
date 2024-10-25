@@ -9,6 +9,7 @@ $(document).ready(function () {
   //set the endpoint for the filter to be dynamic to the current path, this allows for the filter system to be used in multiple contexts/pages
   let filterPostURL = `${location.pathname}/filtered`;
 
+  //strip HTML from input string
   const noHTML = (str) => {
     const regex = /\<\/?[a-z]*\>/gm;
 

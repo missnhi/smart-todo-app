@@ -13,7 +13,6 @@ const changeComplete = function(user_id, task_id) {
   )
   .then((res) => {
     console.log("updated value");
-    console.log(res.rows);
   })
   .catch(err => {
     console.log(err.message);
@@ -34,7 +33,6 @@ const getAllTasksInList = (options, listName, limit = 5, userID = 1) => {
 
   if(options){
     if(options['sort-by']){
-      console.log('options[sort-by]:', typeof options['sort-by']);
       switch (options['sort-by']) {
         case 'newest-first':
           queryOrder += `ORDER BY tasks.id DESC`;
@@ -106,7 +104,6 @@ const getFilteredTasks = (options, limit = 5, userID = 1) => {
 
   if(options){
     if(options['sort-by']){
-      console.log('options[sort-by]:', typeof options['sort-by']);
       switch (options['sort-by']) {
         case 'newest-first':
           queryOrder += `ORDER BY tasks.id DESC`;
@@ -148,9 +145,7 @@ const getFilteredTasks = (options, limit = 5, userID = 1) => {
   LIMIT $2; 
   `;
 
-  console.log(queryString, queryParams);
-
-  return db.query(queryString, queryParams).then((res) => {console.log(res.rows); return res.rows}).catch(err => {console.log(err.message)});
+  return db.query(queryString, queryParams).then((res) => {return res.rows}).catch(err => {console.log(err.message)});
 }
 
 const getAllLists = (userID) => {
@@ -161,7 +156,7 @@ const getAllLists = (userID) => {
   ORDER BY name ASC;
   `;
 
-  return db.query(queryString, [userID]).then((res) => {return res.rows}).catch(err => {console.log(err.message)});
+  return db.query(queryString, [userID]).then((res) => {console.log('res.rows task_lists', res.rows); return res.rows}).catch(err => {console.log(err.message)});
 }
 
 module.exports = {

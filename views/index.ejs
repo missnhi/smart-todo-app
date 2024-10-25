@@ -14,7 +14,7 @@
   <%- include('partials/_header') %>
   <body>
     <!-- TODO: Remove Cards and todo items to components -->
-    <%- include('partials/_hero-banner', {headerText: "INSPIRING, ELEVATING TO-DO LIST."}) %>
+    <%- include('partials/_hero-banner', {headerText: "INSPIRING & ELEVATING <br> YOUR TO-DO LISTS."}) %>
     <a id="home-cta" href="#home-cta">
       <p>Explore Your To-Dos Below</p>
       <i class="fa-solid fa-chevron-down"></i>
@@ -39,7 +39,9 @@
 
       <section class="home-lists">
         <h1>What have you got to do?</h1>
-        <% for(const list of lists) { %>
+        <% console.log('lists', lists) 
+          for(const list of lists) {
+           %>
           <h5><%- list.name %></h5>
         <% } %>
         <div class="flex-row-container">

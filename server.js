@@ -59,11 +59,10 @@ app.use('/todos', todoRoutes);
 app.get('/', async(req, res) => {
   console.log("Route '/' hit");
 
-  const todos = await getFilteredTasks({'sort-by': 'newest-first','in-progress-only': 'in-progress-only'}, 2, req.session.user_id);
+  const todos = await getFilteredTasks({'sort-by': 'newest-first','in-progress-only': 'in-progress-only'}, 4, req.session.user_id);
   const lists = await getAllLists(req.session.user_id);
   console.log('lists are:', lists);
   const user = await getUserById(req);
-  console.log("in server.js, user =",user);
 
   const templateVars = {user, todos, lists};
   res.render('index', templateVars);
