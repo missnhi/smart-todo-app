@@ -16,7 +16,7 @@ main {
 .home-lists,
 .home-todos-glance {
   width: 100%;
-  margin-bottom: 128px;
+  margin-bottom: 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,4 +29,13 @@ main {
 .flex-row-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.content-plus-filter {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  margin-bottom: 2rem;
 }

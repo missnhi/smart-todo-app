@@ -3,7 +3,7 @@
   <head>
     <!-- replace "List" with variable -->
     <title>"List" Tasks</title>
-    
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,26 +17,63 @@
   <body>
     <%- include('partials/_hero-banner', {headerText}) %>
     <main>
-      <h3>Filter To-Dos</h3>
-      <form action='' method="POST" class="filter-todos">
-        <label for="filter-todos">Sort To-Dos By:</label>
-        <select id="filter-todos" class="select-list" name="sort-by">
-          <option value="oldest-first">Oldest First</option>
-          <option value="newest-first">Newest First</option>
-          <option value="AtoZ">A-Z</option>
-          <option value="ZtoA">Z-A</option>
-          <option value="completion">Completion</option>
-          <option value="due-date">Due Date</option>
-        </select>
-        <input type="checkbox" id="completed-only" name="completed-only" value="completed-only" checked>
-        <label for="completed-only">Completed</label>
-        <input type="checkbox" id="in-progress-only" name="in-progress-only" value="in-progress-only" checked>
-        <label for="in-progress-only">In Progress</label>
-        <button type="submit" value="submit">Filter</button>
-      </form>
-      <section id="display-tasks">
+      <section class="home-lists">
+        <h1>Explore your lists</h1>
 
+        <div class="flex-row-container">
+          <% if(lists.length > 0){ for(const list of lists) { %> <%-
+          include('partials/_todo-list-card', {listName: list.name, listIcon:
+          '/assets/flower-icon.png'}) %> <% } } else { %> <%-
+          include('partials/_todo-list-card', {listName: 'Creat A New List',
+          listIcon:
+          'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'})
+          %> <% } %>
+        </div>
       </section>
+
+      <div class="content-plus-filter">
+        <span class="filter-box">
+          <h3>Filter To-Dos</h3>
+          <form action="" method="POST" class="filter-todos">
+            <span>
+              <label for="filter-todos">Sort To-Dos By:</label>
+              <select id="filter-todos" class="select-list" name="sort-by">
+                <option value="oldest-first">Oldest First</option>
+                <option value="newest-first">Newest First</option>
+                <option value="AtoZ">A-Z</option>
+                <option value="ZtoA">Z-A</option>
+                <option value="completion">Completion</option>
+                <option value="due-date">Due Date</option>
+              </select>
+            </span>
+            <span>
+              <input
+                type="checkbox"
+                id="completed-only"
+                name="completed-only"
+                value="completed-only"
+                checked
+              />
+              <label for="completed-only">Completed</label>
+            </span>
+            <span>
+              <input
+                type="checkbox"
+                id="in-progress-only"
+                name="in-progress-only"
+                value="in-progress-only"
+                checked
+              />
+              <label for="in-progress-only">In Progress</label>
+            </span>
+            <button type="submit" value="submit" class="default-btn">
+              Filter
+            </button>
+          </form>
+        </span>
+
+        <section id="display-tasks"></section>
+      </div>
     </main>
     <%- include('partials/_footer') %>
   </body>

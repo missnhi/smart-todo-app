@@ -12,10 +12,11 @@
     <%- include('partials/_hero-banner', {headerText}) %>
     <main>
       <h5>What do you want to do?</h5>
-      <form>
+      <form action='' method="POST" class="create-task">
         <input
           class="task-name"
           type="text"
+          name="task-name"
           placeholder="What do you need to do?"
         />
         <select class="select-list" name="lists">
@@ -28,12 +29,12 @@
           name="description"
           placeholder="Describe your to-do"
         ></textarea>
-        <label for="start">Start date:</label>
+        <label for="due-date">Do By:</label>
 
         <input
           type="datetime-local"
-          id="start"
-          name="trip-start"
+          id="due-date"
+          name="due-date"
         />
         <button class="default-btn" type="submit">+ Add ToDo</button>
       </form>
