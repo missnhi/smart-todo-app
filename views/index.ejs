@@ -30,7 +30,7 @@
 
           <!-- Section: Category announcement and manual change dropdown -->
           <div>
-              <label for="categoryDropdown">This will be added to:</label>
+              <label for="categoryDropdown">This is added to:</label>
               <select id="categoryDropdown" class="select-list" name="lists" >
                   <option value="ToWatch">Watchlist</option>
                   <option value="ToEat">Restaurants</option>
@@ -39,17 +39,18 @@
                   <option value="Uncategorized">Uncategorized</option>
               </select>
 
-              <button id="manualSubmitButton" class="default-btn" type="submit">
-                  Confirm
+              <button id="manualChangeButton" class="default-btn" type="submit">
+                  Confirm Change
               </button>
           </div>
+          <!-- Add a section to display the error if items already in the list -->
+          <div class="error-container"></div>
 
           <!-- Add a section to display the information -->
           <div id="displayInformation">
-              <h6>This is display info</h6>
+<!--              <h6>This is display info</h6>-->
           </div>
       </section>
-
 
       <section class="home-lists">
         <h1>What have you got to do?</h1>
@@ -102,6 +103,10 @@
       </section>
     </main>
     <%- include('partials/_footer') %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/scripts/client.js"></script>
     <script src="/scripts/dropdown-category.js"></script>
+    <script src="/scripts/manual-change.js"></script>
+
   </body>
 </html>
