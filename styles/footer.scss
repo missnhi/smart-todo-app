@@ -5,4 +5,41 @@ footer {
   position: relative;
   bottom: 0;
   color: #fff;
+  display: flex !important;
+  justify-content: space-between; /* Keeps left and right sides apart */
+  align-items: flex-start;
+
+  .left-side {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    h2, h3 {
+      margin: 0.5rem 0;
+    }
+
+    .icons {
+      display: flex;
+      gap: 0.5rem; /* Adjust the gap between icons as needed */
+      margin: 0.5rem 0;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #595e4e;
+      }
+
+      i {
+        font-size: 3rem;
+      }
+    }
+  }
 }
