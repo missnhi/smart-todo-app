@@ -57,7 +57,7 @@
 
       <section class="home-lists">
         <h1>What have you got to do?</h1>
-        <% console.log('lists', lists) 
+        <% console.log('lists', lists)
           for(const list of lists) {
            %>
           <h5><%- list.name %></h5>
@@ -107,7 +107,9 @@
         <section id="display-tasks"></section>
       </section>
     </main>
+
     <%- include('partials/_footer') %>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/scripts/client.js"></script>
     <script src="/scripts/dropdown-category.js"></script>
