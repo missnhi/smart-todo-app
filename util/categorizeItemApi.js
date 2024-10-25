@@ -120,8 +120,10 @@ const exactMatch = (candidateName, itemName) => {
   return candidateName.toLowerCase() === itemName.toLowerCase();
 };
 
+let Vancouver = '49.244468, -123.040448';
+let Edmonton = '53.5461,-113.4938'
 // Main categorization function with parallel API requests, enhanced error handling, and configurable location bias
-const categorizeItem = async (itemName, userLocation = '53.5461,-113.4938') => {
+const categorizeItem = async (itemName, userLocation = Vancouver) => {
   const results = {
     category: 'Uncategorized', // default category
     errors: [], // to store any API errors
@@ -130,8 +132,8 @@ const categorizeItem = async (itemName, userLocation = '53.5461,-113.4938') => {
 
   try {
     // const [ ebayResponse] = await Promise.all([
-    const [bookResponse, movieResponse, placeResponse] = await Promise.all([
-    // const [bookResponse, movieResponse, placeResponse, ebayResponse] = await Promise.all([
+    // const [bookResponse, movieResponse, placeResponse] = await Promise.all([
+    const [bookResponse, movieResponse, placeResponse, ebayResponse] = await Promise.all([
       //Google Books API
       axios.get('https://www.googleapis.com/books/v1/volumes', {
         params: { q: itemName, key: process.env.GOOGLE_BOOKS_API_KEY }
@@ -147,22 +149,22 @@ const categorizeItem = async (itemName, userLocation = '53.5461,-113.4938') => {
         params: {
           input: itemName,
           inputtype: 'textquery',
-          locationbias: `circle:2000@${userLocation}`,
+          locationbias: `circle:5000@${userLocation}`,
           fields: 'formatted_address,name,rating,opening_hours,geometry',
           key: process.env.GOOGLE_PLACES_API_KEY
         }
       }),
-      // //Ebay API
-      // axios.get('https://api.ebay.com/buy/browse/v1/item_summary/search', {
-      //   params: {
-      //     q: itemName // The product name provided by the user
-      //   },
-      //   headers: {
-      //     'Authorization': `Bearer ${process.env.ebayOAuthToken}`,
-      //     'Content-Type': 'application/json',
-      //     'X-EBAY-C-MARKETPLACE-ID': 'EBAY_CA' // Target the Canadian marketplace
-      //   }
-      // })
+      //Ebay API
+      axios.get('https://api.ebay.com/buy/browse/v1/item_summary/search', {
+        params: {
+          q: itemName // The product name provided by the user
+        },
+        headers: {
+          'Authorization': `Bearer ${process.env.ebayOAuthToken}`,
+          'Content-Type': 'application/json',
+          'X-EBAY-C-MARKETPLACE-ID': 'EBAY_CA' // Target the Canadian marketplace
+        }
+      })
     ]);
 
     // Movie
@@ -207,17 +209,17 @@ const categorizeItem = async (itemName, userLocation = '53.5461,-113.4938') => {
       return results;
     }
 
-    // // EBay
-    // if (ebayResponse.data.itemSummaries && ebayResponse.data.itemSummaries.length > 0) {
-    //     results.category = 'ToBuy';
-    //     results.displayInformation = {
-    //       title: ebayResponse.data.itemSummaries[0].title,
-    //       price: ebayResponse.data.itemSummaries[0].price.value,
-    //       image: ebayResponse.data.itemSummaries[0].image.imageUrl,
-    //       itemUrl: ebayResponse.data.itemSummaries[0].itemWebUrl
-    //     };
-    //   return results;
-    // }
+    // EBay
+    if (ebayResponse.data.itemSummaries && ebayResponse.data.itemSummaries.length > 0) {
+        results.category = 'ToBuy';
+        results.displayInformation = {
+          title: ebayResponse.data.itemSummaries[0].title,
+          price: ebayResponse.data.itemSummaries[0].price.value,
+          image: ebayResponse.data.itemSummaries[0].image.imageUrl,
+          itemUrl: ebayResponse.data.itemSummaries[0].itemWebUrl
+        };
+      return results;
+    }
 
   } catch (error) {
     results.errors.push(error.message); // Capture any errors
