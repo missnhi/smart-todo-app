@@ -2,17 +2,19 @@ const db = require("./connection");
 
 
 //Change the complete value in a table
-const changeComplete = function(todo) {
+const changeComplete = function(user_id, task_id) {
   return db.query(
     `
     UPDATE tasks
-    SET complete = $1
-    WHERE name = $2;
+    SET complete = NOT complete
+    WHERE user_id = $1 AND id = $2
+    RETURNING *;
     `,
-    [todo.name, !todo.complete]
+    [user_id, task_id]
   )
-  .then(() => {
+  .then((res) => {
     console.log("updated value");
+    console.log(res.rows);
   })
   .catch(err => {
     console.log(err.message);
@@ -21,7 +23,7 @@ const changeComplete = function(todo) {
 
 const getAllTasksInList = (options, listName, limit = 5, userID = 1) => {
   const queryParams = [userID, listName, limit];
-  const queryOrder = '';
+  let queryOrder = '';
 
   let queryString = `
   SELECT tasks.*
@@ -74,14 +76,14 @@ const getAllTasksInList = (options, listName, limit = 5, userID = 1) => {
   }
 
   queryString += `
-  tasks.user_id = $1
+  AND tasks.user_id = $1
   AND task_lists.name = $2
   GROUP BY tasks.id, tasks.user_id, tasks.name, tasks.complete, task_lists.name
   ${queryOrder}
-  LIMIT $3 
+  LIMIT $3; 
   `;
 
-  console.log(queryString, queryParams);
+  // console.log(queryString, queryParams);
 
   return db.query(queryString, queryParams).then((res) => {return res.rows}).catch(err => {console.log(err.message)});
 }
