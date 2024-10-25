@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
-const { changeComplete, getAllTasksInList, getAllTasks, getFilteredTasks} = require('../db/database-actions');
+const { changeComplete, getAllTasksInList, addTask, getFilteredTasks} = require('../db/database-actions');
 const { getUserById } = require('./_helpers.js');
 
 //Create, Read, Update, Delete
@@ -24,9 +24,16 @@ router.get('/', async (req, res) => {
 //CREATE
 router.get('/new', async(req, res) => {
   const user = await getUserById(req);
-
+  const newTodo = await addTask();
+  
   const templateVars = {user, headerText: "Create a To-Do"};
   res.render('create-todo', templateVars);
+});
+
+router.post('/new', async(req, res) => {
+  console.log(req.body);
+  const newTodo = await addTask(req.session.user_id, undefined, req.body.task-name, req.body.due-date, req.body.description);
+  
 });
 
 //READ

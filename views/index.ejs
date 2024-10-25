@@ -20,11 +20,12 @@
       <i class="fa-solid fa-chevron-down"></i>
     </a>
     <main>
-      <%- include('partials/todo_input_form.ejs') %>
+      
 
       <section class="home-quick-todo">
         <h1>Quick Add a ToDo</h1>
-        <form>
+          <%- include('partials/todo_input_form.ejs') %>
+        <!-- <form>
           <input class="task-name" type="text" placeholder="What do you need to do?" />
           <select class="select-list" name="lists">
               <optgroup label="Add to list">
@@ -33,61 +34,30 @@
               </optgroup>
           </select>
           <button class="default-btn" type="submit">+ Add ToDo</button>
-        </form>
-      </section>
-
-
-      <section class="home-lists">
-        <h1>What have you got to do?</h1>
-        <% console.log('lists', lists) 
-          for(const list of lists) {
-           %>
-          <h5><%- list.name %></h5>
-        <% } %>
-        <div class="flex-row-container">
-          <!-- This will loop over all the lists for a user and display them. For styling purposes, they're hard-coded at the moment -->
-          <div class="todo-list-card">
-            <div class="square-card">
-              <img
-                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-              />
-            </div>
-            <span class="paragraph">List Name →</span>
-          </div>
-
-          <div class="todo-list-card">
-            <div class="square-card">
-              <img
-                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-              />
-            </div>
-            <span class="paragraph">List Name →</span>
-          </div>
-
-          <div class="todo-list-card">
-            <div class="square-card">
-              <img
-                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-              />
-            </div>
-            <span class="paragraph">List Name →</span>
-          </div>
-
-          <div class="todo-list-card">
-            <div class="square-card">
-              <img
-                src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-              />
-            </div>
-            <span class="paragraph">List Name →</span>
-          </div>
-        </div>
+        </form> -->
       </section>
 
       <section class="home-todos-glance">
-        <h1>To-Dos At-A-Glance</h1>
+        <h1>What have you got to do?</h1>
         <section id="display-tasks"></section>
       </section>
+
+      <section class="home-lists">
+        <h1>Explore your lists</h1>
+        
+        <div class="flex-row-container">
+          <% 
+          if(lists.length > 0){ 
+            for(const list of lists) { %>
+              <%- include('partials/_todo-list-card', {listName: list.name, listIcon: '/assets/flower-icon.png'}) %>
+          <% }
+           } else { %>
+              <%- include('partials/_todo-list-card', {listName: 'Creat A New List', listIcon: 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'}) %>
+           <% } %>
+        </div>
+      </section>
+
+      
     </main>
     <%- include('partials/_footer') %>
   </body>

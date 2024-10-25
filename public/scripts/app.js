@@ -117,5 +117,19 @@ $(document).ready(function () {
 
   })
 
+  //on creating a new todo
+  $('.create-task').on('submit', function(event){
+    event.preventDefault();
+    const appliedFilters = $(this).serialize();
+
+    $.post(`/todos/new`, appliedFilters, (data) => {
+      todosData = data.data;
+      console.log('data is:', data);
+      loadTasks(todosData);
+      console.log("loaded filtered data");
+    })
+
+  })
+
   
 });

@@ -159,10 +159,27 @@ const getAllLists = (userID) => {
   return db.query(queryString, [userID]).then((res) => {console.log('res.rows task_lists', res.rows); return res.rows}).catch(err => {console.log(err.message)});
 }
 
+const addTask = (user_id, list_id = null, name, due_date, description) => {
+  let queryString = `
+  INSERT INTO tasks (user_id, list_id, name, description, complete)
+  VALUES
+  (
+  $1,
+  $2,
+  $3,
+  $4,
+  false
+  )
+  `;
+
+  return db.query(queryString, [user_id, list_id, name, due_date, description]).then((res) => {console.log('res.rows task_lists', res.rows); return res.rows}).catch(err => {console.log(err.message)});
+}
+
 module.exports = {
   changeComplete,
   getAllTasksInList,
   getAllTasks,
   getFilteredTasks,
-  getAllLists
+  getAllLists,
+  addTask
 }

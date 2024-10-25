@@ -77,6 +77,9 @@ p, .paragraph {
     background-color: #d27731;
     color: #fff;
   }
+  &:focus{
+    outline: none;
+  }
 }
 
 #home-cta {
