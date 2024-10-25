@@ -175,11 +175,25 @@ const addTask = (user_id, list_id = null, name, due_date, description) => {
   return db.query(queryString, [user_id, list_id, name, due_date, description]).then((res) => {console.log('res.rows task_lists', res.rows); return res.rows}).catch(err => {console.log(err.message)});
 }
 
+const getSingleTask = (taskID, userID) => {
+  let queryString = `
+  SELECT tasks.*, task_lists.name AS list_name
+  FROM tasks
+  LEFT JOIN task_lists ON tasks.list_id = task_lists.id
+  WHERE tasks.id = $1
+  AND tasks.user_id = $2
+  GROUP BY tasks.id, task_lists.name;
+  `;
+
+  return db.query(queryString, [taskID, userID]).then((res) => {console.log(res.rows[0]); return res.rows[0]}).catch(err => {console.log(err.message)});
+}
+
 module.exports = {
   changeComplete,
   getAllTasksInList,
   getAllTasks,
   getFilteredTasks,
   getAllLists,
-  addTask
+  addTask,
+  getSingleTask
 }

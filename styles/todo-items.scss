@@ -18,10 +18,23 @@
     justify-content: space-between;
     align-items: center;
 
+    a{
+      color: #090909;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
     &.completed-item {
       background-color: #757c60;
       color: #fff;
 
+      a{
+        color: #fff;
+        &:hover {
+          text-decoration: none;
+        }
+      }
       &:not(i) {
         text-decoration: line-through;
       }
@@ -56,6 +69,8 @@
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
+      
+      
 
       .todo-item-text {
         display: flex;
@@ -80,10 +95,8 @@
   position: relative;
   left: -3rem;
   cursor: pointer;
-  
 
   &:focus {
     outline: none;
   }
 }
-

@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     const $newTodo = $(`
       <div class="todo-item" id="${todoData.id}">
-        <div class="todo-item-card ${todoData.complete ? 'completed-item' : ''}">
+        <div class="todo-item-card bootstrap-overrides ${todoData.complete ? 'completed-item' : ''}">
           <div class="todo-item-info">
             <button
               type="button"
@@ -31,12 +31,14 @@ $(document).ready(function () {
             >
             <img src="../assets/checkmark.png"/>
             </button>
-            <div class="todo-item-text">
+            <a href="/todos/${todoData.id}">
+              <div class="todo-item-text">
               <span class="todo-item-title">${noHTML(todoData.name)}</span>
               ${todoData.due_date ? `<span class="todo-item-deadline"> ${noHTML(todoData.due_date)} </span>` : ''}
-            </div>
-          </div>
-          <i class="fa-solid fa-chevron-right"></i>
+              </div>
+              </div>
+              <i class="fa-solid fa-chevron-right"></i>
+            </a>
         </div>
       </div>
     `);

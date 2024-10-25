@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
-const { changeComplete, getAllTasksInList, addTask, getFilteredTasks, getAllLists} = require('../db/database-actions');
+const { changeComplete, getAllTasksInList, addTask, getSingleTask, getFilteredTasks, getAllLists} = require('../db/database-actions');
 const { getUserById } = require('./_helpers.js');
 
 //Create, Read, Update, Delete
@@ -39,24 +39,15 @@ router.post('/new', async(req, res) => {
 //READ
 router.get('/:id', async(req, res) => {
   //req params must match the name of the list
-  const todos = await getAllTasksInList({}, req.params.id, 100, req.session.user_id);
+  const singleTask = await getSingleTask(req.params.id, req.session.user_id);
   const user = await getUserById(req);
-  const lists = await getAllLists(req.session.user_id);
 
 
-  const templateVars = {user, todos, headerText: req.params.id, lists};
-  res.render('view-tasks', templateVars);
+  const templateVars = {user, singleTask, headerText: singleTask.name};
+  res.render('task-display', templateVars);
 });
 
 //UPDATE
-//filter the tasks in a given list
-router.post('/:id/filtered', async(req, res) => {
-  const todos = await getAllTasksInList(req.body, req.params.id, 1000, req.session.user_id);
-  res.json({data: todos})
-
-  return res.status(200);
-});
-
 //filter all tasks by the query params
 router.post('/filtered', async (req, res) => {
   const todos = await getFilteredTasks(req.body, 1000, req.session.user_id);
