@@ -27,6 +27,8 @@ The following steps are only for _one_ of the group members to perform.
   - Note: nodemon is used, so you should not have to restart your server
 8. Visit `http://localhost:8080/`
 ## How to run the POSTGRESQL database
+```sudo service postgresql start```
+!important: this is only need when you restart the computer. 
 ```psql ```
 then input the password for DB_USER as defined in your .env file
 create the database name, let say smarttodo (also in your .env file)
